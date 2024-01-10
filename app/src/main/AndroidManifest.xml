@@ -1,0 +1,31 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.project48">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+        <!-- IntroActivity 设置为启动活动 -->
+        <activity android:name="IntroActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 其他活动定义 -->
+        <activity android:name="MainActivity" />
+        <activity android:name="LoginActivity" />
+        <activity android:name="SignupActivity" />
+        <!-- 如有其他活动，继续在此处添加 -->
+
+    </application>
+</manifest>

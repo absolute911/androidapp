@@ -2,6 +2,7 @@ package com.example.project48;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,7 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -44,38 +51,40 @@ public class LoginActivity extends AppCompatActivity {
     private void attemptLogin() {
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-
-        // 输入验证（省略）
-
-        // 执行登录
         performLogin(username, password);
     }
 
     private void performLogin(String username, String password) {
         new Thread(() -> {
+            OkHttpClient client = new OkHttpClient();
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+            // Create JSON object
+            JSONObject jsonObject = new JSONObject();
             try {
-                OkHttpClient client = new OkHttpClient();
-                RequestBody formBody = new FormBody.Builder()
-                        .add("username", username)
-                        .add("password", password)
-                        .build();
+                jsonObject.put("username", username);
+                jsonObject.put("password", password);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Error creating JSON", Toast.LENGTH_SHORT).show());
+                return; // Stop further execution in case of JSON exception
+            }
 
-                Request request = new Request.Builder()
-                        .url("您的登录接口 URL") // 替换为您的登录接口 URL
-                        .post(formBody)
-                        .build();
+            RequestBody body = RequestBody.create(jsonObject.toString(), JSON);
+            Request request = new Request.Builder()
+                    .url("http://192.168.50.143:3000/login")
+                    .post(body)
+                    .build();
 
-                Response response = client.newCall(request).execute();
-
+            try (Response response = client.newCall(request).execute()) {
+                final String responseBody = response.body() != null ? response.body().string() : null;
                 runOnUiThread(() -> {
-                    if (response.isSuccessful()) {
-                        // 登录成功
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    if (response.isSuccessful() && responseBody != null) {
+                        Toast.makeText(LoginActivity.this, responseBody, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainpageActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        // 登录失败
                         Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -85,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+
 }
 
 

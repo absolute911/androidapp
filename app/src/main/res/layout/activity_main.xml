@@ -7,12 +7,52 @@
     android:background="#11AAD8"
     tools:context="com.example.project48.MainActivity" >
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="香港廁所查找器">
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- activity_main.xml 示例 -->
+    <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
+
+        <!-- 主内容区 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- 您的主要内容 -->
+        </LinearLayout>
+
+        <!-- 导航视图 -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/lateral_navigation_menu" /> <!-- 指定菜单资源 -->
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+
     <ImageView
         android:id="@+id/imageView111"
         android:layout_width="126dp"
         android:layout_height="66dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="116dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile1" />
@@ -21,12 +61,13 @@
         android:id="@+id/textView111"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="你好,用戶XXX"
         android:textColor="#ffffff"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView111"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView111"
         app:layout_constraintTop_toBottomOf="@+id/imageView111" />
 
@@ -34,17 +75,19 @@
         android:id="@+id/textViewMainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="歡迎使用香港廁所查找器"
-        android:textStyle="bold"
         android:textColor="#FEDD06"
         android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView111" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="381dp"
+        android:layout_height="339dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/bottom_background_light_green"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@id/textViewMainTitle">
 
 
-    <TableLayout
+        <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,10 +109,13 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
 
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="18dp"
                     android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,8 +123,8 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/white_btn_background">
 
-                        <ImageView
-                            android:id="@+id/imageViewForumIcon"
+                        <ImageButton
+                            android:id="@+id/imageButtonMapIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -86,62 +132,17 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0"
-                            app:srcCompat="@drawable/circle_green" />
+                            app:srcCompat="@drawable/circle_green" /> <!-- 设置ImageButton的图像资源 -->
 
-                        <ImageView
-                            android:id="@+id/imageViewForumIcon2"
+                        <ImageButton
+                            android:id="@+id/imageButtonMapButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/btn_1" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/textViewForum"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="論壇"
-                        android:textAlignment="center"
-                        android:textColor="#6E3434"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/white_btn_background">
-
-                        <ImageView
-                            android:id="@+id/imageViewMapIcon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/circle_green" />
-
-                        <ImageView
-                            android:id="@+id/imageViewMapButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/btn_2" />
+                            app:srcCompat="@drawable/btn_2" /> <!-- 设置ImageButton的图像资源 -->
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -154,48 +155,8 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/white_btn_background">
 
-                        <ImageView
-                            android:id="@+id/imageViewContactIcon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/circle_green" />
-
-                        <ImageView
-                            android:id="@+id/imageViewContactButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageViewContactIcon"
-                            app:layout_constraintEnd_toEndOf="@+id/imageViewContactIcon"
-                            app:layout_constraintStart_toStartOf="@+id/imageViewContactIcon"
-                            app:layout_constraintTop_toTopOf="@+id/imageViewContactIcon"
-                            app:srcCompat="@drawable/btn_3" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/textViewContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="聯絡我們"
-                        android:textAlignment="center"
-                        android:textColor="#34346E"
-                        android:textSize="18sp" />
-                </LinearLayout>
             </TableRow>
 
             <TableRow
@@ -214,8 +175,8 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/white_btn_background">
 
-                        <ImageView
-                            android:id="@+id/imageViewMapIcon2"
+                        <ImageButton
+                            android:id="@+id/imageButtonMapIcon2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -223,17 +184,17 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/circle_green" />
+                            app:srcCompat="@drawable/circle_green" /> <!-- 设置ImageButton的图像资源 -->
 
-                        <ImageView
-                            android:id="@+id/imageViewMapButton2"
+                        <ImageButton
+                            android:id="@+id/imageButtonMapButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageViewMapIcon2"
-                            app:layout_constraintEnd_toEndOf="@+id/imageViewMapIcon2"
-                            app:layout_constraintStart_toStartOf="@+id/imageViewMapIcon2"
-                            app:layout_constraintTop_toTopOf="@+id/imageViewMapIcon2"
-                            app:srcCompat="@drawable/btn_4" />
+                            app:layout_constraintBottom_toBottomOf="@+id/imageButtonMapIcon2"
+                            app:layout_constraintEnd_toEndOf="@+id/imageButtonMapIcon2"
+                            app:layout_constraintStart_toStartOf="@+id/imageButtonMapIcon2"
+                            app:layout_constraintTop_toTopOf="@+id/imageButtonMapIcon2"
+                            app:srcCompat="@drawable/btn_4" /> <!-- 设置ImageButton的图像资源 -->
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -246,6 +207,7 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -257,8 +219,8 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/white_btn_background">
 
-                        <ImageView
-                            android:id="@+id/imageViewSettingsIcon2"
+                        <ImageButton
+                            android:id="@+id/imageButtonSettingsIcon2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -266,17 +228,17 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/circle_green" />
+                            app:srcCompat="@drawable/circle_green" /> <!-- 设置ImageButton的图像资源 -->
 
-                        <ImageView
-                            android:id="@+id/imageViewSettingsButton2"
+                        <ImageButton
+                            android:id="@+id/imageButtonSettingsButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageViewSettingsIcon2"
-                            app:layout_constraintEnd_toEndOf="@+id/imageViewSettingsIcon2"
-                            app:layout_constraintStart_toStartOf="@+id/imageViewSettingsIcon2"
-                            app:layout_constraintTop_toTopOf="@+id/imageViewSettingsIcon2"
-                            app:srcCompat="@drawable/btn_5" />
+                            app:layout_constraintBottom_toBottomOf="@+id/imageButtonSettingsIcon2"
+                            app:layout_constraintEnd_toEndOf="@+id/imageButtonSettingsIcon2"
+                            app:layout_constraintStart_toStartOf="@+id/imageButtonSettingsIcon2"
+                            app:layout_constraintTop_toTopOf="@+id/imageButtonSettingsIcon2"
+                            app:srcCompat="@drawable/btn_5" /> <!-- 设置ImageButton的图像资源 -->
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -289,6 +251,7 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -300,8 +263,8 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/white_btn_background">
 
-                        <ImageView
-                            android:id="@+id/imageViewSettingsIcon3"
+                        <ImageButton
+                            android:id="@+id/imageButtonSettingsIcon3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -309,17 +272,17 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/circle_green" />
+                            app:srcCompat="@drawable/circle_green" /> <!-- 设置ImageButton的图像资源 -->
 
-                        <ImageView
-                            android:id="@+id/imageView"
+                        <ImageButton
+                            android:id="@+id/imageButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageViewSettingsIcon3"
-                            app:layout_constraintEnd_toEndOf="@+id/imageViewSettingsIcon3"
-                            app:layout_constraintStart_toStartOf="@+id/imageViewSettingsIcon3"
-                            app:layout_constraintTop_toTopOf="@+id/imageViewSettingsIcon3"
-                            app:srcCompat="@drawable/btn_6" />
+                            app:layout_constraintBottom_toBottomOf="@+id/imageButtonSettingsIcon3"
+                            app:layout_constraintEnd_toEndOf="@+id/imageButtonSettingsIcon3"
+                            app:layout_constraintStart_toStartOf="@+id/imageButtonSettingsIcon3"
+                            app:layout_constraintTop_toTopOf="@+id/imageButtonSettingsIcon3"
+                            app:srcCompat="@drawable/btn_6" /> <!-- 设置ImageButton的图像资源 -->
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -331,6 +294,7 @@
                         android:textColor="#34346E"
                         android:textSize="18sp" />
                 </LinearLayout>
+
             </TableRow>
 
         </TableLayout>

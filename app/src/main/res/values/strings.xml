@@ -1,3 +1,115 @@
 <resources>
     <string name="app_name">project</string>
+
+
+    <!--    Permissions    -->
+    <string name="permission_rationale_location">需要訪問位置才能在地圖上定位自己並添加新點。</string>
+    <string name="location_permission_denied">您可以在不允許定位的情況下使用該應用程序，但某些功能將會遺失。
+         \n如果該權限已被永久拒絕，可以從「系統設定」>「應用程式」>「旅行地圖」>「權限」啟用它</string>
+    <string name="permission_required_toast">此演示需要位置權限。</string>
+    <string name="position_fab_str">位置</string>
+    <string name="navigation_drawer_open">打開導航</string>
+    <string name="navigation_drawer_close">關閉導航</string>
+    <string name="test_str">Test</string>
+    <string name="item_manager_str">行政人員</string>
+    <string name="item_water_tap_str">水點</string>
+    <string name="item_toilette_str">洗手間</string>
+    <string name="item_bin_str">垃圾桶</string>
+    <string name="menu_title">要顯示的項目：</string>
+    <string name="icon_description_str">圖示說明</string>
+    <string name="recycler_item_first_line_str">第一行</string>
+    <string name="recycler_item_meta_str">meta</string>
+    <string name="recycler_item_second_line_str">第二行</string>
+    <string name="header_name_str">登入/註冊</string>
+    <string name="header_email_str">點這裡</string>
+    <string name="snack_disconnect_str">已斷開連接</string>
+
+    <string name="add_point_form_name_str">姓名</string>
+    <string name="add_point_form_category_str">類別</string>
+    <string name="add_point_form_location_str">GPS座標</string>
+    <string name="add_point_form_cancel_btn_str">取消</string>
+    <string name="add_point_form_send_btn_str">傳送</string>
+    <string name="add_point_category_error_str">請選擇一個分類</string>
+    <string name="add_point_city_determine_error_str">無法確定城市。 再試一次</string>
+    <string name="add_point_success_add_str">添加成功</string>
+    <string name="add_point_picture_textView_str">拍照或從設備中選擇</string>
+    <string name="add_point_picture_icon_imageView_desc_str">添加照片圖標</string>
+    <string name="add_point_picture_imageView_desc_str">用戶添加的照片</string>
+
+    <string name="need_account_dialog_title_str">需要帳戶的操作</string>
+    <string name="need_account_dialog_message_str">請登入或建立帳戶以將項目新增至地圖</string>
+    <string name="need_account_dialog_negativeButton_str">關閉</string>
+    <string name="need_account_dialog_positiveButton_str">連接</string>
+
+    <string name="no_connection_header_title_str">登入/註冊</string>
+    <string name="no_connection_header_subtitle_str">點這裡</string>
+
+    <string name="manager_city_selector_str">會</string>
+
+    <string name="bottom_sheet_add_picture_str">新增圖片</string>
+    <string name="bottom_sheet_apn_desc_str">透過相機添加</string>
+    <string name="bottom_sheet_apn_str">相機</string>
+    <string name="bottom_sheet_gallery_desc_str">透過圖庫添加</string>
+    <string name="bottom_sheet_gallery_str">畫廊</string>
+
+    <string name="access_profile_hint_str">訪問資料</string>
+    <string name="profile_picture_nav_header_desc_str">頭像照片</string>
+    <string name="toast_not_connect_str">尚未連接</string>
+
+    <string name="delete_account_dialog_negative_btn">取消</string>
+    <string name="delete_account_dialog_positive_btn">刪除</string>
+    <string name="delete_account_dialog_title">輸入您的密碼進行確認：</string>
+    <string name="delete_account_dialog_layout_hint_str">密碼</string>
+
+    <string name="toast_account_success_delete_str">您的帳戶已被刪除</string>
+    <string name="top_app_bar_send_btn_desc_str">發送按鈕</string>
+    <string name="top_app_bar_send_btn_title_str">發送按鈕</string>
+    <string name="bottom_sheet_point_icon_desc_str">底部工作表點圖標</string>
+    <string name="no_user_found_str">未找到相應的用戶</string>
+    <string name="poi_detail_indicator_icon_desc_str">批准圖示</string>
+    <string name="point_detail_confirm_str">確認</string>
+    <string name="point_detail_not_found_icon_desc_str">無效圖示</string>
+    <string name="point_detail_not_found_str">未找到</string>
+    <string name="point_detail_validate_icon_desc_str">驗證點圖示</string>
+    <string name="point_detail_report_desc_str">報告問題點圖標</string>
+    <string name="point_detail_report_str">問題</string>
+    <string name="point_detail_location_icon_desc_str">位置圖示</string>
+    <string name="point_detail_last_validation_desc_str">上次驗證圖標</string>
+    <string name="point_detail_add_date_desc_str">新增日期圖示</string>
+    <string name="point_detail_approved_by_nb_str">已獲 X 用戶批准</string>
+    <string name="point_detail_add_date_str">由用戶 2 個月前新增</string>
+    <string name="point_detail_validate_date_str">於 2020 年 1 月 11 日下午 2:35 驗證</string>
+    <string name="point_detail_direction_icon_desc_str">方向圖示</string>
+    <string name="point_detail_name_str">名稱</string>
+    <string name="point_detail_location_str">本土化</string>
+    <string name="point_detail_image_desc_str">點像</string>
+    <string name="manage_city_nav_menu_str">城市管理</string>
+    <string name="manage_user_nav_menu_str">使用者管理</string>
+    <string name="bottom_sheet_up_arrow_desc_str">底部工作表圖標</string>
+    <string name="bottom_sheet_direction_icon_desc_str">方向圖示</string>
+    <string name="bottom_sheet_point_name_str">點名稱</string>
+    <string name="bottom_sheet_confirm_nb_str">經X用戶確認</string>
+    <string name="user_manager_search_by_email_str">透過電子郵件搜尋</string>
+    <string name="user_manager_search_btn_str">研究</string>
+    <string name="user_manage_right_level_text_view_hint_str">權利等級</string>
+    <string name="user_profile_name_str">名字</string>
+    <string name="user_profile_email_str">mail@gmail.com</string>
+    <string name="uer_profile_disconnect_btn_str">斷開</string>
+    <string name="user_profile_delete_account_btn_str">刪除我的帳戶</string>
+    <string name="price_free_str">價格：免費</string>
+    <string name="no_vote_str">尚未提交投票</string>
+    <string name="check_icon_city_recycler_item">檢查圖示</string>
+    <string name="i_am_storekeeper_str">接受您的上傳是正確的</string>
+    <string name="default_price_editText_str">0.00</string>
+    <string name="add_point_price_hint_str">地點</string>
+    <string name="manager_user_city_selection_textView_str">城市選擇：</string>
+    <string name="dialog_delete_point_str">刪除項目</string>
+    <string name="dialog_disable_point_str">暫時停用</string>
+    <string name="dialog_info_point_str">查看資訊表</string>
+    <string name="dialog_see_problem_point_str">管理報告的問題</string>
+    <string name="radio_button_point_not_working_str">非功能性</string>
+    <string name="radio_button_point_bad_maintenance_str">維護不當</string>
+    <string name="add_point_name_error_str">請提供姓名</string>
+    <string name="overflow">Overflow</string>
+
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories_array">
+        <item>公共厕所</item>
+        <item>餐厅</item>
+        <item>咖啡馆</item>
+        <item>购物中心</item>
+        <item>公园</item>
+        <item>加油站</item>
+        <item>图书馆</item>
+    </string-array>
+</resources>

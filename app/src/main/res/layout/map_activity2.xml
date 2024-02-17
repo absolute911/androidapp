@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="0.5dp"
+    tools:context=".MapActivity2">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView2"
+        android:layout_width="match_parent"
+        android:layout_height="680dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button100m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100m"
+            android:onClick="onDistanceButtonClick" />
+
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="0dp"/>
+
+        <Button
+            android:id="@+id/button500m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="500m"
+            android:onClick="onDistanceButtonClick" />
+
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="0dp"/>
+
+        <Button
+            android:id="@+id/button1km"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1km"
+            android:onClick="onDistanceButtonClick" />
+
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="0dp"/>
+
+        <Button
+            android:id="@+id/button2km"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2km"
+            android:onClick="onDistanceButtonClick" />
+    </LinearLayout>
+
+    <!-- Star rating and paid/public indicator -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RatingBar
+            android:id="@+id/ratingTextView"
+            style="@android:style/Widget.DeviceDefault.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="4"
+            android:stepSize="1"/>
+
+        <TextView
+            android:id="@+id/paid"
+            style="@style/Base.ThemeOverlay.AppCompat.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="paid"
+            android:padding="3dp"
+            android:textSize="14sp"/>
+
+        <TextView
+            style="@style/Base.ThemeOverlay.AppCompat.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="public"
+            android:padding="3dp"
+            android:textSize="14sp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
+    <TextView
+        android:id="@+id/distanceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
+    <Button
+        android:id="@+id/mapButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Map" />
+
+</LinearLayout>

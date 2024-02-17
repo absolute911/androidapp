@@ -6,4 +6,6 @@
 
     <color name="fabPositionBackground">#FFFFFF</color>
     <color name="colorDivider">#1F000000</color>
+
+    <color name="teal_200">#6200EE</color>
 </resources>

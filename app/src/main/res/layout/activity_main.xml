@@ -169,7 +169,7 @@
                         android:id="@+id/textViewSettings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="設定"
+                        android:text="廁所清單"
                         android:textAlignment="center"
                         android:textColor="#34346E"
                         android:textSize="18sp" />
@@ -213,7 +213,7 @@
                         android:id="@+id/textViewForum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="使用者論壇"
+                        android:text="我的最愛"
                         android:textAlignment="center"
                         android:textColor="#34346E"
                         android:textSize="18sp" />

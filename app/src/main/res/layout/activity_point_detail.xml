@@ -379,8 +379,6 @@
                     android:layout_marginStart="8dp"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
 
-                    android:text="@string/point_detail_location_str"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView11"
                     app:layout_constraintTop_toTopOf="parent"

@@ -3,7 +3,6 @@ package com.example.project48;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.util.Log;
@@ -39,7 +38,17 @@ public class MainpageActivity extends AppCompatActivity {
                 logout();
             }
         });
+
+        ImageButton imageButtonMapButton = findViewById(R.id.imageButtonMapButton);
+        imageButtonMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                detail();
+            }
+        });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,6 +78,11 @@ public class MainpageActivity extends AppCompatActivity {
         finish(); // 關閉當前活動
     }
 
+    private void detail(){
+        Intent intent = new Intent(MainpageActivity.this, detailActivity.class);
+        startActivity(intent);
+        finish();
+    }
     // 實現顯示彈出菜單的邏輯
     private void showPopupMenu() {
         Log.d("MainpageActivity", "showPopupMenu: Showing popup menu");

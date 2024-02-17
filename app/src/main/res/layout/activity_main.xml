@@ -115,10 +115,10 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
-                        android:id="@+id/textViewMap"
+                        android:id="@+id/textViewNearestToilet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="地圖"
+                        android:text="最近廁所"
                         android:textAlignment="center"
                         android:textColor="#34346E"
                         android:textSize="16sp" />
@@ -169,7 +169,7 @@
                         android:id="@+id/textViewSettings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="設定"
+                        android:text="廁所清單"
                         android:textAlignment="center"
                         android:textColor="#34346E"
                         android:textSize="18sp" />
@@ -210,10 +210,10 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
-                        android:id="@+id/textViewFavorites"
+                        android:id="@+id/textViewForum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="我的最愛"
+                        android:text="使用者論壇"
                         android:textAlignment="center"
                         android:textColor="#34346E"
                         android:textSize="18sp" />

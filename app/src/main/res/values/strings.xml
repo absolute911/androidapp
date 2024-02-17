@@ -72,7 +72,7 @@
     <string name="point_detail_not_found_str">未找到</string>
     <string name="point_detail_validate_icon_desc_str">驗證點圖示</string>
     <string name="point_detail_report_desc_str">報告問題點圖標</string>
-    <string name="point_detail_report_str">問題</string>
+    <string name="point_detail_report_str">評論</string>
     <string name="point_detail_location_icon_desc_str">位置圖示</string>
     <string name="point_detail_last_validation_desc_str">上次驗證圖標</string>
     <string name="point_detail_add_date_desc_str">新增日期圖示</string>

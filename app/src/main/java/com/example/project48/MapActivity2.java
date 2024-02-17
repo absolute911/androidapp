@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
-// Testing2
+// Testing
 public class MapActivity2 extends AppCompatActivity implements OnMapReadyCallback {
 
     private TextView locationTextView;

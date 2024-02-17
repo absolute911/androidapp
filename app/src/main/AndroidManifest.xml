@@ -25,6 +25,9 @@
         <activity android:name=".detailActivity">
             <!-- Add any intent filters if needed -->
         </activity>
+        <activity android:name=".listActivity">
+            <!-- Add any intent filters if needed -->
+        </activity>
         <activity android:name=".MainpageActivity">
             <!-- Add any intent filters if needed -->
         </activity>

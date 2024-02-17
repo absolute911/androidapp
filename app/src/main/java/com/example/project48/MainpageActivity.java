@@ -39,11 +39,21 @@ public class MainpageActivity extends AppCompatActivity {
             }
         });
 
+
+        //toilet detail button
         ImageButton imageButtonMapButton = findViewById(R.id.imageButtonMapButton);
         imageButtonMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 detail();
+            }
+        });
+        //toilet list button
+        ImageButton imageButtonMapButton2 = findViewById(R.id.imageButtonMapButton2);
+        imageButtonMapButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list();
             }
         });
     }
@@ -80,6 +90,12 @@ public class MainpageActivity extends AppCompatActivity {
 
     private void detail(){
         Intent intent = new Intent(MainpageActivity.this, detailActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void list(){
+        Intent intent = new Intent(MainpageActivity.this, listActivity.class);
         startActivity(intent);
         finish();
     }

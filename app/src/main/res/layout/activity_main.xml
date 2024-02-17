@@ -169,7 +169,7 @@
                         android:id="@+id/textViewSettings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="廁所清單"
+                        android:text="設定"
                         android:textAlignment="center"
                         android:textColor="#34346E"
                         android:textSize="18sp" />

@@ -98,7 +98,8 @@
         android:lines="8"
         android:maxLines="10"
         android:minLines="6"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:hint="Enter your text here" />
 
     <Space
         android:layout_width="0dp"

@@ -11,7 +11,8 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView2"
         android:layout_width="match_parent"
-        android:layout_height="680dp" />
+        android:layout_height="680dp"
+        android:contentDescription="Map view for displaying location information"/>
 
     <LinearLayout
         android:layout_width="match_parent"

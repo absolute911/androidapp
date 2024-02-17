@@ -11,7 +11,8 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView3"
         android:layout_width="match_parent"
-        android:layout_height="700dp" />
+        android:layout_height="700dp"
+        android:contentDescription="Map view for displaying location information"/>
 
     <RatingBar
         android:id="@+id/ratingTextView"

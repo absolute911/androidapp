@@ -3,6 +3,7 @@ package com.example.project48;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ public class detailActivity extends AppCompatActivity {
     private TextView activity_poi_last_opentime_textView;
     private TextView activity_poi_location_textView;
 
+    private TextView point_detail_report_text;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,13 @@ public class detailActivity extends AppCompatActivity {
         poi_detail_name_textView = findViewById(R.id.poi_detail_name_textView); // Make sure to replace 'your_text_view_id' with the actual ID of your TextView in the layout.
         activity_poi_last_opentime_textView = findViewById(R.id.activity_poi_last_opentime_textView);
         activity_poi_location_textView = findViewById(R.id.activity_poi_location_textView);
+        point_detail_report_text = findViewById(R.id.point_detail_report_text);
+        point_detail_report_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goComment();
+            }
+        });
 
         // Convert latitude and longitude from String to double
         double lat = Double.parseDouble(latitude);
@@ -94,5 +104,12 @@ public class detailActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+
+    private void goComment(){
+        Intent intent = new Intent(detailActivity.this, UserCommentActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

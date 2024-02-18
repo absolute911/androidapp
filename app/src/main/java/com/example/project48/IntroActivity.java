@@ -13,6 +13,19 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_activity); // 使用 intro_activity.xml 作为布局
 
+        Button buttonWithoutLogin = findViewById(R.id.buttonWithoutLogin);
+        if (buttonWithoutLogin != null) {
+            buttonWithoutLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 启动 LoginActivity
+                    Intent intent = new Intent(IntroActivity.this, MainpageActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
+
         // 登入按钮
         Button loginButton = findViewById(R.id.buttonLogin); // 确保这是您登入按钮的正确 ID
         if (loginButton != null) {

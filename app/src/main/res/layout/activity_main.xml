@@ -238,6 +238,8 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/white_btn_background">
 
+                        <!-- 设置ImageButton的图像资源 -->
+
                         <ImageButton
                             android:id="@+id/imageButtonSettingsIcon3"
                             android:layout_width="wrap_content"
@@ -247,7 +249,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/circle_green" /> <!-- 设置ImageButton的图像资源 -->
+                            app:srcCompat="@drawable/circle_green" />
 
                         <ImageButton
                             android:id="@+id/imageButton"
@@ -257,6 +259,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/imageButtonSettingsIcon3"
                             app:layout_constraintStart_toStartOf="@+id/imageButtonSettingsIcon3"
                             app:layout_constraintTop_toTopOf="@+id/imageButtonSettingsIcon3"
+                            app:layout_constraintVertical_bias="0.514"
                             app:srcCompat="@drawable/btn_6" /> <!-- 设置ImageButton的图像资源 -->
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -264,7 +267,7 @@
                         android:id="@+id/textViewLogout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="登出"
+                        android:text="添加廁所"
                         android:textAlignment="center"
                         android:textColor="#34346E"
                         android:textSize="18sp" />

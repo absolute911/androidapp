@@ -30,7 +30,7 @@ public class MainpageActivity extends AppCompatActivity {
 
 
         // 找到 ImageButton 並設置點擊事件監聽器
-        ImageButton imageButtonLogout = findViewById(R.id.imageButtonSettingsIcon3);
+        ImageButton imageButtonLogout = findViewById(R.id.imageButtonaddButton);
         imageButtonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +54,14 @@ public class MainpageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 list();
+            }
+        });
+
+        ImageButton imageFormButton = findViewById(R.id.imageButton);
+        imageFormButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                form();
             }
         });
     }
@@ -96,6 +104,12 @@ public class MainpageActivity extends AppCompatActivity {
 
     private void list(){
         Intent intent = new Intent(MainpageActivity.this, listActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void form(){
+        Intent intent = new Intent(MainpageActivity.this, AddToiletActivity.class);
         startActivity(intent);
         finish();
     }

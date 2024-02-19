@@ -20,10 +20,9 @@ public class SessionManager {
         editor = prefs.edit();
     }
 
-    public void createLoginSession(String username, String email) {
+    public void createLoginSession(String username ) {
         editor.putBoolean(KEY_IS_LOGGEDIN, true);
         editor.putString(KEY_USERNAME, username);
-        editor.putString(KEY_EMAIL, email);
         editor.commit();
     }
 

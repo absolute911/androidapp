@@ -25,7 +25,6 @@ public class SignupActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextPasswordConfirm;
-    private SessionManager sessionManager; // 确保 SessionManager 已经实现
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class SignupActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextPasswordConfirm = findViewById(R.id.editTextPasswordConfirm);
-        sessionManager = new SessionManager(getApplicationContext());
+
 
         Button buttonRegister = findViewById(R.id.buttonRegister);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +103,6 @@ public class SignupActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     if (response.isSuccessful() && responseBody != null) {
                         Toast.makeText(SignupActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                        sessionManager.createLoginSession(userName, email); // 在这里创建登录会话
                         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();

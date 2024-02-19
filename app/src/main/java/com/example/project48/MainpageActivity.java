@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.content.Intent;
 import android.widget.PopupMenu; // 導入 PopupMenu 類
+import android.widget.TextView;
 
 public class MainpageActivity extends AppCompatActivity {
 
@@ -21,6 +22,16 @@ public class MainpageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        String username = sessionManager.getUsername();
+        TextView userName = findViewById(R.id.textView111);
+        if (sessionManager.isLoggedIn()) {
+            // User is logged in, proceed to the next activity or show logged in state
+            userName.setText("你好,用戶" + username);
+        } else {
+            // User is not logged in, redirect to login activity
+            userName.setText("Please login");
+        }
 
         // 設置 Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);

@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
 
+    private SessionManager sessionManager; // 确保 SessionManager 已经实现
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextUsername = findViewById(R.id.editTextUserAccount);
         editTextPassword = findViewById(R.id.editTextPassword);
+        sessionManager = new SessionManager(getApplicationContext());
 
         Button loginButton = findViewById(R.id.buttonLogin2);
         if (loginButton != null) {
@@ -80,7 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                 final String responseBody = response.body() != null ? response.body().string() : null;
                 runOnUiThread(() -> {
                     if (response.isSuccessful() && responseBody != null) {
+                        String userName = username;
                         Toast.makeText(LoginActivity.this, responseBody, Toast.LENGTH_SHORT).show();
+                        sessionManager.createLoginSession(userName); // 在这里创建登录会话
                         Intent intent = new Intent(LoginActivity.this, MainpageActivity.class);
                         startActivity(intent);
                         finish();

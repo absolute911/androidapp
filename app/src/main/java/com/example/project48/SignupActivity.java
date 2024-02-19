@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -26,17 +25,19 @@ public class SignupActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextPasswordConfirm;
+    private SessionManager sessionManager; // 确保 SessionManager 已经实现
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
 
-        // 初始化控件
+        // 初始化控件和 SessionManager
         editTextUserName = findViewById(R.id.editTextUserName);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextPasswordConfirm = findViewById(R.id.editTextPasswordConfirm);
+        sessionManager = new SessionManager(getApplicationContext());
 
         Button buttonRegister = findViewById(R.id.buttonRegister);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
@@ -48,13 +49,11 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-        // 获取用户输入
         String userName = editTextUserName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString();
         String passwordConfirm = editTextPasswordConfirm.getText().toString();
 
-        // 输入验证
         if (TextUtils.isEmpty(userName)) {
             editTextUserName.setError("请输入用户名");
             return;
@@ -75,7 +74,6 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        // 向后端服务器发送请求
         sendRegistrationRequest(userName, email, password);
     }
 
@@ -88,12 +86,11 @@ public class SignupActivity extends AppCompatActivity {
             try {
                 jsonObject.put("username", userName);
                 jsonObject.put("password", password);
-                jsonObject.put("email", email); // Assuming you want to include the email in the JSON body.
-
+                jsonObject.put("email", email);
             } catch (JSONException e) {
                 e.printStackTrace();
                 runOnUiThread(() -> Toast.makeText(SignupActivity.this, "Error creating JSON for registration", Toast.LENGTH_SHORT).show());
-                return; // Stop further execution in case of JSON exception
+                return;
             }
 
             RequestBody body = RequestBody.create(jsonObject.toString(), JSON);
@@ -106,23 +103,23 @@ public class SignupActivity extends AppCompatActivity {
                 final String responseBody = response.body() != null ? response.body().string() : null;
                 runOnUiThread(() -> {
                     if (response.isSuccessful() && responseBody != null) {
-                        Toast.makeText(SignupActivity.this, "注册成功", Toast.LENGTH_SHORT).show(); // "Registration Successful"
+                        Toast.makeText(SignupActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                        sessionManager.createLoginSession(userName, email); // 在这里创建登录会话
                         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(SignupActivity.this, "注册失败", Toast.LENGTH_SHORT).show(); // "Registration Failed"
+                        Toast.makeText(SignupActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(SignupActivity.this, "注册出错", Toast.LENGTH_SHORT).show()); // "Error in Registration"
+                runOnUiThread(() -> Toast.makeText(SignupActivity.this, "注册出错", Toast.LENGTH_SHORT).show());
             }
         }).start();
     }
-
-
 }
+
 
 
 

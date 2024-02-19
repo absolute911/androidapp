@@ -3,6 +3,7 @@ package com.example.project48;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,7 +72,7 @@ public class detailActivity extends AppCompatActivity {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
             String url = "http://192.168.50.143:3000/items/nearest?latitude=" + latitude + "&longitude=" + longitude;
-
+            //String url ="http://192.168.50.143:3000/items/nearest?latitude=123.123&longitude=321.321";
             Request request = new Request.Builder()
                     .url(url)
                     .get()
@@ -83,19 +84,26 @@ public class detailActivity extends AppCompatActivity {
                     if (response.isSuccessful() && responseBody != null) {
                         try {
                             JSONObject jsonObject = new JSONObject(responseBody);
-                            // Extract data as before
-                            String name = jsonObject.getString("name");
-                            String open_hours = jsonObject.getString("open_hours");
-                            String address = jsonObject.getString("address");
-                            // Update the UI
-                            poi_detail_name_textView.setText(name);
-                            activity_poi_last_opentime_textView.setText(open_hours);
-                            activity_poi_location_textView.setText(address);
-                            // Additional UI updates as needed
+                            if (jsonObject.has("nearestToilet")) {
+                                JSONObject nearestToiletObject = jsonObject.getJSONObject("nearestToilet");
+
+                                String name = nearestToiletObject.getString("name");
+                                String open_hours = nearestToiletObject.getString("open_hours");
+                                String address = nearestToiletObject.getString("address");
+
+                                // Update the UI
+                                poi_detail_name_textView.setText(name);
+                                activity_poi_last_opentime_textView.setText(open_hours);
+                                activity_poi_location_textView.setText(address);
+                            } else {
+                                // Handle the case where the "nearestToilet" key is missing in the JSON response
+                                // You can show an error message or handle it as needed
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             // Handle JSON parsing errors
                         }
+
                     } else {
                         Toast.makeText(detailActivity.this, "fetch fail", Toast.LENGTH_SHORT).show();
                     }

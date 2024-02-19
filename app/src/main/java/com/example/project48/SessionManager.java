@@ -26,6 +26,23 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void clearLoginSession() {
+        // Clearing all data from SharedPreferences
+        editor.clear();
+        editor.commit();
+
+        // After clearing the session, you might want to redirect the user to the login screen
+        // Intent intent = new Intent(context, LoginActivity.class);
+        // Closing all the Activities
+        // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        // Add new Flag to start new Activity
+        // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        // Starting Login Activity
+        // context.startActivity(intent);
+    }
+
     public boolean isLoggedIn() {
         return prefs.getBoolean(KEY_IS_LOGGEDIN, false);
     }

@@ -7,11 +7,18 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class IntroActivity extends AppCompatActivity {
-
+    private SessionManager sessionManager; // 确保 SessionManager 已经实现
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_activity); // 使用 intro_activity.xml 作为布局
+
+        sessionManager = new SessionManager(getApplicationContext());
+        if (sessionManager.isLoggedIn()) {
+            Intent intent = new Intent(IntroActivity.this, MainpageActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         Button buttonWithoutLogin = findViewById(R.id.buttonWithoutLogin);
         if (buttonWithoutLogin != null) {

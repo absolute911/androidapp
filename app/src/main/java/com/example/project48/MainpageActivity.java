@@ -102,6 +102,8 @@ public class MainpageActivity extends AppCompatActivity {
     // 登出操作
     private void logout() {
         // 在這裡執行登出操作，例如清除用戶會話、導航到登錄屏幕等
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.clearLoginSession();
         Intent intent = new Intent(MainpageActivity.this, IntroActivity.class);
         startActivity(intent);
         finish(); // 關閉當前活動
@@ -139,5 +141,7 @@ public class MainpageActivity extends AppCompatActivity {
         });
         popup.show();
     }
+
+
 }
 

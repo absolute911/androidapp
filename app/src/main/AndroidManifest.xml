@@ -22,6 +22,9 @@
         </activity>
 
         <!-- 其他活动定义 -->
+        <activity android:name=".Forum.ForumActivity">
+            <!-- Add any intent filters if needed -->
+        </activity>
         <activity android:name=".AddToiletActivity">
             <!-- Add any intent filters if needed -->
         </activity>

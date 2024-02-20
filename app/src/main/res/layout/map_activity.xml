@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="0.5dp"
     tools:context=".MapActivity">
@@ -12,45 +12,6 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="680dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Restrooms nearby you"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-
-    <RatingBar
-        android:id="@+id/starRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rating="0"
-        android:stepSize="1" />
-
-    <TextView
-        android:id="@+id/locationTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        android:textSize="14sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000" />
-
-    <TextView
-        android:id="@+id/distanceTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Distance"
-        android:textSize="14sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000" />
 
     <Button
         android:id="@+id/mapButton"

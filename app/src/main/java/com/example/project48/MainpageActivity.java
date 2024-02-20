@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.widget.PopupMenu; // 導入 PopupMenu 類
 import android.widget.TextView;
 
+import com.example.project48.Forum.ForumActivity;
+
 public class MainpageActivity extends AppCompatActivity {
 
     private DrawerLayout drawer; // 定義 DrawerLayout 作為類成員變量，便於在其他方法中訪問
@@ -75,6 +77,15 @@ public class MainpageActivity extends AppCompatActivity {
                 form();
             }
         });
+
+        ImageButton imageForumButton = findViewById(R.id.imageButtonSettingsButton2);
+        imageForumButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forum();
+
+            }
+        });
     }
 
 
@@ -126,6 +137,13 @@ public class MainpageActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    private void forum(){
+        Intent intent = new Intent(MainpageActivity.this, ForumActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     // 實現顯示彈出菜單的邏輯
     private void showPopupMenu() {
         Log.d("MainpageActivity", "showPopupMenu: Showing popup menu");

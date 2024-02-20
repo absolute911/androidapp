@@ -255,11 +255,10 @@
                     android:contentDescription="@string/point_detail_add_date_desc_str" />
 
                 <TextView
-                    android:id="@+id/activity_poi_add_data_textView"
+                    android:id="@+id/activity_poi_distance_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/point_detail_add_date_str"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView9"

@@ -50,51 +50,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_detail_title" />
 
-        <TextView
-            android:id="@+id/post_detail_date_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="TextView"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            tools:text="by test" />
-
-        <TextView
-            android:id="@+id/post_detail_desc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:lineSpacingExtra="8dp"
-            android:text=""
-            android:textColor="#373737"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_detail_date_name" />
 
         <RatingBar
             android:id="@+id/post_detail_rating"
-            style="@android:style/Widget.DeviceDefault.RatingBar.Small"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="247dp"
+            android:layout_height="59dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
-            android:lineSpacingExtra="8dp"
             android:isIndicator="true"
-            android:numStars="5"
-            android:rating="3"
+            android:lineSpacingExtra="8dp"
+            android:rating="0"
             android:stepSize="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_detail_desc" />
-
+            app:layout_constraintTop_toBottomOf="@+id/post_detail_title" />
 
         <ImageView
             android:id="@+id/post_detail_currentuser_img"
@@ -132,16 +102,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/post_detail_comment"
             app:layout_constraintTop_toTopOf="@+id/post_detail_comment" />
-
-        <ImageView
-            android:id="@+id/post_detail_user_img"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/post_detail_date_name"
-            app:layout_constraintStart_toEndOf="@+id/post_detail_date_name"
-            app:layout_constraintTop_toTopOf="@+id/post_detail_date_name"
-            tools:srcCompat="@tools:sample/avatars" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_comment"

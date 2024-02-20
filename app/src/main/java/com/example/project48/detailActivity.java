@@ -29,6 +29,7 @@ public class detailActivity extends AppCompatActivity {
     private TextView activity_poi_location_textView;
 
     private TextView point_detail_report_text;
+    private TextView activity_poi_distance_textView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,6 +41,8 @@ public class detailActivity extends AppCompatActivity {
         activity_poi_last_opentime_textView = findViewById(R.id.activity_poi_last_opentime_textView);
         activity_poi_location_textView = findViewById(R.id.activity_poi_location_textView);
         point_detail_report_text = findViewById(R.id.point_detail_report_text);
+        activity_poi_distance_textView = findViewById(R.id.activity_poi_distance_textView);
+
         point_detail_report_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,11 +93,13 @@ public class detailActivity extends AppCompatActivity {
                                 String name = nearestToiletObject.getString("name");
                                 String open_hours = nearestToiletObject.getString("open_hours");
                                 String address = nearestToiletObject.getString("address");
-
+                                String distance = jsonObject.getString("distance");
                                 // Update the UI
                                 poi_detail_name_textView.setText(name);
                                 activity_poi_last_opentime_textView.setText(open_hours);
                                 activity_poi_location_textView.setText(address);
+                                activity_poi_distance_textView.setText(distance);
+
                             } else {
                                 // Handle the case where the "nearestToilet" key is missing in the JSON response
                                 // You can show an error message or handle it as needed
@@ -125,5 +130,6 @@ public class detailActivity extends AppCompatActivity {
         // Handle the click action here
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
+        //finish();
     }
 }

@@ -1,10 +1,13 @@
 package com.example.project48;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -49,8 +52,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private MapView mapView;
 
     private GoogleMap googleMap;
+    private JSONObject nearestToilet;
 
-    private JSONArray nearestToiletArray;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,14 +68,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-//        // Convert latitude and longitude from String to double
-//        double lat = Double.parseDouble(latitude);
-//        double lon = Double.parseDouble(longitude);
-
-        // Fetch the details as soon as the page loads
-//        getDataFromIntent(lat, lon);
-
-        checkLocationService();
+        //checkLocationService();
 
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,79 +105,40 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void getDataFromIntent() {
-        try {
-            String json = getIntent().getStringExtra("json");
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray nearestToiletArray = jsonObject.getJSONArray("nearestToilet");
-        } catch (JSONException e) {
-            e.printStackTrace();
+        String json = getIntent().getStringExtra("json");
+        if (json != null) {
+            try {
+                nearestToilet = new JSONObject(json);
+                // Process the JSON data here
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("NextActivity", "No JSON data found in intent");
         }
     }
 
     private void displayMarkersOnMap() {
-        if (nearestToiletArray == null) {
+        if (nearestToilet == null) {
             Toast.makeText(this, "No toilet data available", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        for (int i = 0; i < nearestToiletArray.length(); i++) {
             try {
-                JSONObject toiletObject = nearestToiletArray.getJSONObject(i);
+                JSONObject toiletObject = nearestToilet.getJSONObject("nearestToilet");
                 String name = toiletObject.getString("name");
                 String coordinates = toiletObject.getString("coordinates");
                 double latitude = Double.parseDouble(coordinates.split(",")[0]);
                 double longitude = Double.parseDouble(coordinates.split(",")[1]);
                 LatLng latLng = new LatLng(latitude, longitude);
 
-                Marker marker = googleMap.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .title(name));
 
-                // Fetch the distance for the marker's coordinates
-                fetchDistance(marker, latitude, longitude);
+                googleMap.addMarker(new MarkerOptions().position(latLng).title(name));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
-        if (nearestToiletArray == null || nearestToiletArray.length() == 0) {
-            Toast.makeText(this, "No toilet data available", Toast.LENGTH_SHORT).show();
-            return;
-        }
-    }
-
-    private void fetchDistance(Marker marker, double latitude, double longitude) {
-        new Thread(() -> {
-            OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/items/nearest?latitude=" + latitude + "&longitude=" + longitude;
-            Request request = new Request.Builder()
-                    .url(url)
-                    .get()
-                    .build();
-
-            try (Response response = client.newCall(request).execute()) {
-                final String responseBody = response.body() != null ? response.body().string() : null;
-                runOnUiThread(() -> {
-                    if (response.isSuccessful() && responseBody != null) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(responseBody);
-                            double distance = jsonObject.optDouble("distance");
-
-                            // Update the marker's snippet with the distance
-                            marker.setSnippet("Distance: " + distance + " meters");
-                            marker.showInfoWindow();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast.makeText(this, "Failed to fetch distance", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
 
 
     private void checkLocationService() {
@@ -217,23 +174,69 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         dialog.show();
     }
 
-    @Override
     public void onMapReady(GoogleMap map) {
         googleMap = map;
         getDataFromIntent();
-        displayMarkersOnMap();
-        // Zoom to show the whole of Hong Kong
-        LatLngBounds hongKongBounds = new LatLngBounds(new LatLng(22.3608, 113.9154),
-                new LatLng(22.362745, 114.5025));
+        displayMarkersOnMap(); // Add the marker to the map
 
-        if (mapView.getViewTreeObserver().isAlive()) {
-            mapView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
+        // Define the Hong Kong bounds
+        final LatLngBounds hongKongBounds = new LatLngBounds(
+                new LatLng(22.3608, 113.9154), // SW corner
+                new LatLng(22.362745, 114.5025) // NE corner
+        );
+
+        // Get the mapView reference
+        final View mapView = findViewById(R.id.mapView);
+
+        // Wait for the map to be laid out before setting the bounds
+        mapView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @SuppressLint("NewApi") // We check which build version we are using.
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    mapView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                } else {
                     mapView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(hongKongBounds, 0));
                 }
-            });
-        }
+
+                // Check if nearestToilet is available
+                if (nearestToilet != null) {
+                    try {
+                        JSONObject toiletObject = nearestToilet.getJSONObject("nearestToilet");
+                        String coordinates = toiletObject.getString("coordinates");
+                        double latitude = Double.parseDouble(coordinates.split(",")[0]);
+                        double longitude = Double.parseDouble(coordinates.split(",")[1]);
+                        LatLng latLng = new LatLng(latitude, longitude);
+
+                        // Create a LatLngBounds with nearestToilet and Hong Kong bounds
+                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                        builder.include(latLng);
+                        builder.include(hongKongBounds.southwest);
+                        builder.include(hongKongBounds.northeast);
+                        LatLngBounds combinedBounds = builder.build();
+
+                        // Specify the map's size directly
+                        int width = mapView.getWidth();
+                        int height = mapView.getHeight();
+                        int padding = (int) (width * 0.10); // 10% padding around the bounds
+
+                        // Animate the camera to show the combined bounds
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(combinedBounds, width, height, padding));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Fallback if no marker data is available, with dynamic map size
+                    int width = mapView.getWidth();
+                    int height = mapView.getHeight();
+                    int padding = (int) (width * 0.10); // 10% padding
+
+                    // Move the camera to show the Hong Kong bounds
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(hongKongBounds, width, height, padding));
+                }
+            }
+        });
     }
+
+
 }

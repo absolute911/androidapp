@@ -38,6 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_detail_img" />
 
+
         <View
             android:id="@+id/view"
             android:layout_width="0dp"
@@ -47,22 +48,22 @@
             android:layout_marginEnd="16dp"
             android:background="#2e2e2e"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_detail_title" />
 
-
         <RatingBar
             android:id="@+id/post_detail_rating"
-            android:layout_width="247dp"
-            android:layout_height="59dp"
+            android:layout_width="236dp"
+            android:layout_height="62dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="16dp"
             android:isIndicator="true"
             android:lineSpacingExtra="8dp"
             android:rating="0"
             android:stepSize="1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.438"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_detail_title" />
 

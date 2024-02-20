@@ -31,6 +31,9 @@ public class detailActivity extends AppCompatActivity {
     private TextView point_detail_report_text;
     private TextView activity_poi_distance_textView;
 
+    private String json;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +60,6 @@ public class detailActivity extends AppCompatActivity {
         // Fetch the details as soon as the page loads
         getDetail(lat, lon);
     }
-//    return json sample
-//    {
-//        "rating": 3,
-//            "comments": [],
-//        "img": [],
-//        "_id": "6502fea138490f96fdbad3b2",
-//            "name": "東平洲公廁",
-//            "address": "東平洲",
-//            "open_hours": "24 小時",
-//            "coordinates": "22.544192,114.432503",
-//            "facility": [],
-//        "image": []
-//    }
 
     private void getDetail(double latitude, double longitude) {
         new Thread(() -> {
@@ -89,7 +79,8 @@ public class detailActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(responseBody);
                             if (jsonObject.has("nearestToilet")) {
                                 JSONObject nearestToiletObject = jsonObject.getJSONObject("nearestToilet");
-
+                                // After parsing the JSON response
+                                json = jsonObject.toString();
                                 String name = nearestToiletObject.getString("name");
                                 String open_hours = nearestToiletObject.getString("open_hours");
                                 String address = nearestToiletObject.getString("address");
@@ -127,9 +118,8 @@ public class detailActivity extends AppCompatActivity {
     }
 
     public void directionPointBtnClick(View view) {
-        // Handle the click action here
-        Intent intent = new Intent(this, MapActivity.class);
+        Intent intent = new Intent(detailActivity.this, MapActivity.class);
+        intent.putExtra("json", json); // Replace 'jsonString' with your JSON string
         startActivity(intent);
-        //finish();
     }
 }

@@ -58,7 +58,7 @@
             android:layout_height="62dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
-            android:isIndicator="true"
+            android:isIndicator="false"
             android:lineSpacingExtra="8dp"
             android:rating="0"
             android:stepSize="1"

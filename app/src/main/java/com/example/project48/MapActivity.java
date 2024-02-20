@@ -70,7 +70,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         double lon = Double.parseDouble(longitude);
 
         // Fetch the details as soon as the page loads
-        getDataFromIntent(lat, lon);
+//        getDataFromIntent(lat, lon);
 
         checkLocationService();
 
@@ -151,9 +151,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             double distance = distanceObject.getDouble("distance");
 
                             // Update the distance for the corresponding marker
-                            Marker marker = markers.get(index);
-                            marker.setSnippet("Distance: " + distance + " meters");
-                            marker.showInfoWindow();
+//                            Marker marker = markers.get(index);
+//                            marker.setSnippet("Distance: " + distance + " meters");
+//                            marker.showInfoWindow();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

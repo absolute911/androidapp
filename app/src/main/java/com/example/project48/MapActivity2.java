@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +26,21 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 // Testing
 public class MapActivity2 extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -111,6 +125,77 @@ public class MapActivity2 extends AppCompatActivity implements OnMapReadyCallbac
     public void onLowMemory() {
         super.onLowMemory();
         mapView2.onLowMemory();
+    }
+
+    private void getDetail(double latitude, double longitude) {
+        OkHttpClient client = new OkHttpClient();
+        String url = "http://192.168.50.143:3000/items/nearest?latitude=" + latitude + "&longitude=" + longitude;
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MapActivity2.this, "Fetch failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String responseBody = response.body() != null ? response.body().string() : null;
+                runOnUiThread(new Runnable() {
+                    private BigInteger markers;
+
+                    @Override
+                    public void run() {
+                        if (response.isSuccessful() && responseBody != null) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(responseBody);
+                                if (jsonObject.has("nearestToilet")) {
+                                    JSONArray nearestToiletArray = jsonObject.getJSONArray("nearestToilet");
+
+                                    for (int i = 0; i < nearestToiletArray.length(); i++) {
+                                        JSONObject nearestToiletObject = nearestToiletArray.getJSONObject(i);
+                                        String name = nearestToiletObject.getString("name");
+                                        String openHours = nearestToiletObject.getString("open_hours");
+                                        String address = nearestToiletObject.getString("address");
+                                        String coordinates = nearestToiletObject.getString("coordinates");
+
+                                        // Extract latitude and longitude from coordinates string
+                                        String[] latLng = coordinates.split(",");
+                                        double markerLat = Double.parseDouble(latLng[0]);
+                                        double markerLng = Double.parseDouble(latLng[1]);
+
+                                        // Add marker to the map
+                                        Marker marker = googleMap.addMarker(new MarkerOptions()
+                                                .position(new LatLng(markerLat, markerLng))
+                                                .title(name)
+                                                .snippet("Open Hours: " + openHours + "\nAddress: " + address));
+                                        assert marker != null;
+//                                        markers.add(marker);
+                                    }
+                                } else {
+                                    // Handle the case where the "nearestToilet" key is missing in the JSON response
+                                    // You can show an error message or handle it as needed
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                // Handle JSON parsing errors
+                            }
+                        } else {
+                            Toast.makeText(MapActivity2.this, "Fetch failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 
 

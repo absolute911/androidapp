@@ -54,19 +54,19 @@ public class detailActivity extends AppCompatActivity {
         // Fetch the details as soon as the page loads
         getDetail(lat, lon);
     }
-    //return json sample
-    //{
-    //    "rating": 3,
-    //        "comments": [],
-    //    "img": [],
-    //    "_id": "6502fea138490f96fdbad3b2",
-    //        "name": "東平洲公廁",
-    //        "address": "東平洲",
-    //        "open_hours": "24 小時",
-    //        "coordinates": "22.544192,114.432503",
-    //        "facility": [],
-    //    "image": []
-    //}
+//    return json sample
+//    {
+//        "rating": 3,
+//            "comments": [],
+//        "img": [],
+//        "_id": "6502fea138490f96fdbad3b2",
+//            "name": "東平洲公廁",
+//            "address": "東平洲",
+//            "open_hours": "24 小時",
+//            "coordinates": "22.544192,114.432503",
+//            "facility": [],
+//        "image": []
+//    }
 
     private void getDetail(double latitude, double longitude) {
         new Thread(() -> {
@@ -119,5 +119,11 @@ public class detailActivity extends AppCompatActivity {
         Intent intent = new Intent(detailActivity.this, UserCommentActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void directionPointBtnClick(View view) {
+        // Handle the click action here
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
     }
 }

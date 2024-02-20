@@ -43,6 +43,7 @@
         <activity android:name="MainActivity" />
         <activity android:name="SignupActivity" />
         <!-- 如有其他活动，继续在此处添加 -->
+        <activity android:name=".MapActivity" />
         <activity android:name=".MapActivity2" />
         <activity android:name=".MapActivity3" />
         <activity android:name=".MapActivity4" />

@@ -42,6 +42,12 @@ public class detailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_point_detail);
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            Toilet selectedToilet = intent.getParcelableExtra("toilet");
+            // Use the selectedToilet object as needed
+        }
+
         poi_detail_name_textView = findViewById(R.id.poi_detail_name_textView); // Make sure to replace 'your_text_view_id' with the actual ID of your TextView in the layout.
         activity_poi_last_opentime_textView = findViewById(R.id.activity_poi_last_opentime_textView);
         activity_poi_location_textView = findViewById(R.id.activity_poi_location_textView);

@@ -70,6 +70,13 @@ public class listActivity extends AppCompatActivity {
                             ListView listView = findViewById(R.id.ToiletListView);
                             ToiletAdapter adapter = new ToiletAdapter(this, toiletList);
                             listView.setAdapter(adapter);
+
+                            listView.setOnItemClickListener((parent, view, position, id) -> {
+                                Toilet selectedToilet = (Toilet) parent.getItemAtPosition(position);
+                                Intent intent = new Intent(listActivity.this, detailActivity.class);
+                                intent.putExtra("toilet", selectedToilet);
+                                startActivity(intent);
+                            });
                         } catch (JSONException e) {
                             e.printStackTrace();
                             // Handle error
@@ -83,10 +90,5 @@ public class listActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
-    }
-
-    public void toiletListBtnClick(View view) {
-        Intent intent = new Intent(listActivity.this, detailActivity.class);
-        startActivity(intent);
     }
 }

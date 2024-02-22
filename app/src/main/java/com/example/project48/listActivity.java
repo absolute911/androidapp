@@ -1,6 +1,9 @@
 package com.example.project48;
 
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -75,5 +78,10 @@ public class listActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    public void toiletListBtnClick(View view) {
+        Intent intent = new Intent(listActivity.this, detailActivity.class);
+        startActivity(intent);
     }
 }

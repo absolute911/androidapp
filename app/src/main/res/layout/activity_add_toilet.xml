@@ -61,14 +61,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/add_point_form_edit_str">
+                android:layout_marginEnd="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_point_editText"
+                    android:id="@+id/add_name_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_marginBottom="4dp"
+                    android:hint="name" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,14 +79,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/add_point_form_name_str">
+                android:layout_marginEnd="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_point_name_editText"
+                    android:id="@+id/add_openhour_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"/>
+                    android:layout_marginBottom="4dp"
+                    android:hint="openhour" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,17 +97,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/add_point_price_hint_str">
+                android:layout_marginEnd="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_point_price_editText"
+                    android:id="@+id/add_address_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="@string/default_price_editText_str"
-                    android:textDirection="firstStrongLtr"
-                    android:inputType="numberDecimal"/>
+                    android:hint="address"
+                    android:inputType="none"
+                    android:textDirection="firstStrongLtr" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -189,8 +188,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:inputType="none"
-                    android:enabled="false"/>
+                    android:editable="true"
+                    android:enabled="false"
+                    android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

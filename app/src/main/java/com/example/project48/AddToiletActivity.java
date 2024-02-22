@@ -68,8 +68,9 @@ public class AddToiletActivity extends AppCompatActivity {
     }
 
     public void addToiletBtnClick(View view) {
+        Toast.makeText(this, "Thank you", Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(AddToiletActivity.this, MainpageActivity.class);
-//        intent.putExtra("json", json); // Replace 'jsonString' with your JSON string
         startActivity(intent);
     }
 }

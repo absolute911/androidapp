@@ -29,7 +29,6 @@ public class detailActivity extends AppCompatActivity {
     private TextView poi_detail_name_textView;
     private TextView activity_poi_last_opentime_textView;
     private TextView activity_poi_location_textView;
-
     private TextView point_detail_report_text;
     private TextView activity_poi_distance_textView;
     private TextView point_detail_rating_text;

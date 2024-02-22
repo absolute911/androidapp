@@ -1,6 +1,7 @@
 package com.example.project48;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -55,7 +56,8 @@ public class listActivity extends AppCompatActivity {
                                 Toilet toilet = new Toilet(
                                         jsonObject.getInt("rating"),
                                         jsonObject.getString("name"),
-                                        jsonObject.getDouble("distance")
+                                        jsonObject.getDouble("distance"),
+                                        jsonObject.getString("_id")
                                 );
                                 toiletList.add(toilet);
                             }

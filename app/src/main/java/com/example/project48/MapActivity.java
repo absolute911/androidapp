@@ -43,8 +43,6 @@ import okhttp3.Response;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private String latitude ="123.123";
-    private String longitude = "321.321";
     private TextView locationTextView;
     private TextView distanceTextView;
     private Button mapButton;
@@ -60,8 +58,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_activity);
 
-        locationTextView = findViewById(R.id.locationTextView);
-        distanceTextView = findViewById(R.id.distanceTextView);
+        //locationTextView = findViewById(R.id.locationTextView);
+        //distanceTextView = findViewById(R.id.distanceTextView);
         mapButton = findViewById(R.id.mapButton);
 
         mapView = findViewById(R.id.mapView);
@@ -132,9 +130,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 double longitude = Double.parseDouble(coordinates.split(",")[1]);
                 LatLng latLng = new LatLng(latitude, longitude);
 
+                double SampleLatitude = Double.parseDouble("22.317507333012692");
+                double SampleLongitude = Double.parseDouble("114.1797521678627");
+                LatLng sampleLatLng = new LatLng(SampleLatitude, SampleLongitude);
+
+
 
                 googleMap.addMarker(new MarkerOptions().position(latLng).title(name));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
+
+                //sample marker
+                googleMap.addMarker(new MarkerOptions().position(sampleLatLng).title("HKMU JC"));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 標題 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="篩選廁所"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:padding="16dp"/>
+
+    <!-- 圖像按鈕篩選選項 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <!-- 男廁 -->
+        <ImageButton
+            android:id="@+id/imageButton_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/male_icon"
+            android:background="@android:color/transparent"
+            android:contentDescription="男廁"/>
+
+        <!-- 女廁 -->
+        <ImageButton
+            android:id="@+id/imageButton_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/female_icon"
+            android:background="@android:color/transparent"
+            android:contentDescription="女廁"/>
+
+        <!-- 育嬰室 -->
+        <ImageButton
+            android:id="@+id/imageButton_baby_changing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baby_changing_icon"
+            android:background="@android:color/transparent"
+            android:contentDescription="育嬰室"/>
+
+        <!-- 傷殘洗手間 -->
+        <ImageButton
+            android:id="@+id/imageButton_accessible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_accessible_black_24dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="傷殘洗手間"/>
+
+        <!-- 政府物業 -->
+        <ImageButton
+            android:id="@+id/imageButton_building"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_location_city_24"
+            android:background="@android:color/transparent"
+            android:contentDescription="政府物業"/>
+
+    </LinearLayout>
+
+    <!-- 篩選按鈕 -->
+    <Button
+        android:id="@+id/button_apply_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="應用篩選"
+        android:layout_margin="16dp"/>
+
+</LinearLayout>
+
+

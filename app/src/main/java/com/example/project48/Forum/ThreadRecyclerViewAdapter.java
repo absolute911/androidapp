@@ -49,7 +49,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
     public void onBindViewHolder(ViewHolder holder, int position) {
         ForumThread thread = threads.get(position);
         holder.tvTitle.setText(thread.getTitle());
-        holder.tvContent.setText(thread.getContent());
+        //holder.tvContent.setText(thread.getContent());
         holder.tvID.setText(thread.getId());
     }
 

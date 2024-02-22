@@ -322,16 +322,16 @@
                     android:contentDescription="@string/point_detail_location_icon_desc_str" />
 
                 <TextView
-                    android:id="@+id/point_detail_price_text"
+                    android:id="@+id/point_detail_rating_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="評分"
+
                     android:textAppearance="?attr/textAppearanceSubtitle1"
 
-                    android:text=" ："
-
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/point_detail_price_icon"
+                    app:layout_constraintStart_toEndOf="@id/point_detail_price_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.511" />
 

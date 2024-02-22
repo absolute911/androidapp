@@ -22,14 +22,17 @@ import okhttp3.Response;
 
 
 public class detailActivity extends AppCompatActivity {
-    private String latitude ="123.123";
-    private String longitude = "321.321";
+    //hkmu jc coordinates
+    //22.317507333012692, 114.1797521678627
+    private String latitude ="22.317507333012692";
+    private String longitude = "114.1797521678627";
     private TextView poi_detail_name_textView;
     private TextView activity_poi_last_opentime_textView;
     private TextView activity_poi_location_textView;
 
     private TextView point_detail_report_text;
     private TextView activity_poi_distance_textView;
+    private TextView point_detail_rating_text;
 
     private String json;
 
@@ -45,6 +48,7 @@ public class detailActivity extends AppCompatActivity {
         activity_poi_location_textView = findViewById(R.id.activity_poi_location_textView);
         point_detail_report_text = findViewById(R.id.point_detail_report_text);
         activity_poi_distance_textView = findViewById(R.id.activity_poi_distance_textView);
+        point_detail_rating_text = findViewById(R.id.point_detail_rating_text);
 
         point_detail_report_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,11 +88,13 @@ public class detailActivity extends AppCompatActivity {
                                 String open_hours = nearestToiletObject.getString("open_hours");
                                 String address = nearestToiletObject.getString("address");
                                 String distance = jsonObject.getString("distance");
+                                String rating = nearestToiletObject.getString("rating");
                                 // Update the UI
                                 poi_detail_name_textView.setText(name);
                                 activity_poi_last_opentime_textView.setText(open_hours);
                                 activity_poi_location_textView.setText(address);
                                 activity_poi_distance_textView.setText(distance);
+                                point_detail_rating_text.setText("評分" + rating);
 
                             } else {
                                 // Handle the case where the "nearestToilet" key is missing in the JSON response

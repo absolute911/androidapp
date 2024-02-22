@@ -76,7 +76,7 @@ public class AddToiletActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextInputEditText ETcoordinates = findViewById(R.id.point_location_edit_text);
-                ETcoordinates.setText("123,123");
+                ETcoordinates.setText("22.317507333012692, 114.1797521678627");
                 // 实现定位或打开地图选择位置的逻辑
                 Toast.makeText(AddToiletActivity.this, "Location icon clicked", Toast.LENGTH_SHORT).show();
             }

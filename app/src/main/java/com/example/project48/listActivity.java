@@ -18,8 +18,8 @@ import okhttp3.Response;
 
 public class listActivity extends AppCompatActivity {
 
-    private String latitude ="123.123";
-    private String longitude = "321.321";
+    private String latitude ="22.317507333012692";
+    private String longitude = "114.1797521678627";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toilet_list);

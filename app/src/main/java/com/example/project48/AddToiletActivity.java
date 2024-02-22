@@ -92,11 +92,11 @@ public class AddToiletActivity extends AppCompatActivity {
         String open_hours = ETopenhour.getText().toString();
         String address = ETaddress.getText().toString();
         String coordinates = ETcoordinates.getText().toString();
-        Toast.makeText(this, "Thank you", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Thank you very much", Toast.LENGTH_SHORT).show();
         addToilet(name, address, open_hours, coordinates);
 
 
-        Toast.makeText(this, "Thank you", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Thank you very much", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(AddToiletActivity.this, MainpageActivity.class);
         startActivity(intent);

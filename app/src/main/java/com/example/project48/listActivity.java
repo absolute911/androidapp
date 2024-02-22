@@ -3,7 +3,11 @@ package com.example.project48;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+//<<<<<<< HEAD
 import android.view.View;
+//=======
+import android.util.Log;
+//>>>>>>> origin/master
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,8 +25,8 @@ import okhttp3.Response;
 
 public class listActivity extends AppCompatActivity {
 
-    private String latitude ="123.123";
-    private String longitude = "321.321";
+    private String latitude ="22.317507333012692";
+    private String longitude = "114.1797521678627";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toilet_list);
@@ -58,7 +62,8 @@ public class listActivity extends AppCompatActivity {
                                 Toilet toilet = new Toilet(
                                         jsonObject.getInt("rating"),
                                         jsonObject.getString("name"),
-                                        jsonObject.getDouble("distance")
+                                        jsonObject.getDouble("distance"),
+                                        jsonObject.getString("_id")
                                 );
                                 toiletList.add(toilet);
                             }

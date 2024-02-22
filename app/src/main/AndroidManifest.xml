@@ -28,8 +28,8 @@
         <activity android:name=".AddToiletActivity">
             <!-- Add any intent filters if needed -->
         </activity>
-        <activity android:name=".UserCommentActivity">
-            <!-- Add any intent filters if needed -->
+        <activity
+            android:name=".UserCommentActivity">
         </activity>
         <activity android:name=".detailActivity">
             <!-- Add any intent filters if needed -->

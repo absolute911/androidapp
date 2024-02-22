@@ -45,12 +45,12 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/add_point_selector_textView"
-                    android:hint="@string/add_point_form_category_str"
-                    android:labelFor="@id/add_point_selector_textLayout"
-                    android:inputType="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_marginBottom="4dp"
+                    android:hint="@string/add_point_form_category_str"
+                    android:inputType="none"
+                    android:labelFor="@id/add_point_selector_textLayout" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -183,8 +183,8 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 android:paddingStart="10dp"
-                app:buttonTint="@color/colorAccent"
                 android:text="@string/i_am_storekeeper_str"
+                app:buttonTint="@color/colorAccent"
                 tools:ignore="RtlSymmetry" />
 
         </LinearLayout>

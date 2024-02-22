@@ -65,7 +65,6 @@ public class detailActivity extends AppCompatActivity {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
             String url = "http://192.168.50.143:3000/items/nearest?latitude=" + latitude + "&longitude=" + longitude;
-            //String url ="http://192.168.50.143:3000/items/nearest?latitude=123.123&longitude=321.321";
             Request request = new Request.Builder()
                     .url(url)
                     .get()
@@ -113,8 +112,9 @@ public class detailActivity extends AppCompatActivity {
 
     private void goComment(){
         Intent intent = new Intent(detailActivity.this, UserCommentActivity.class);
+        intent.putExtra("json", json); // Replace 'jsonString' with your JSON string
         startActivity(intent);
-        finish();
+
     }
 
     public void directionPointBtnClick(View view) {

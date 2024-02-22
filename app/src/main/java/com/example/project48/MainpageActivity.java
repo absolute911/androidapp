@@ -123,25 +123,25 @@ public class MainpageActivity extends AppCompatActivity {
     private void detail(){
         Intent intent = new Intent(MainpageActivity.this, detailActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private void list(){
         Intent intent = new Intent(MainpageActivity.this, listActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private void form(){
         Intent intent = new Intent(MainpageActivity.this, AddToiletActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private void forum(){
         Intent intent = new Intent(MainpageActivity.this, ForumActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     // 實現顯示彈出菜單的邏輯

@@ -1,5 +1,6 @@
 package com.example.project48;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -28,7 +29,7 @@ public class AddToiletActivity extends AppCompatActivity {
         });
 
         // 分类选择器设置
-        setupCategorySelector();
+//        setupCategorySelector();
 
         // 图片添加布局点击监听器
         setupImageAddListener();
@@ -37,12 +38,12 @@ public class AddToiletActivity extends AppCompatActivity {
         setupLocationIconListener();
     }
 
-    private void setupCategorySelector() {
-        AutoCompleteTextView categorySelector = findViewById(R.id.add_point_selector_textView);
-        String[] categories = getResources().getStringArray(R.array.categories_array); // 确保您在res/values/strings.xml中定义了categories_array
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
-        categorySelector.setAdapter(adapter);
-    }
+//    private void setupCategorySelector() {
+//        AutoCompleteTextView categorySelector = findViewById(R.id.add_point_selector_textView);
+//        String[] categories = getResources().getStringArray(R.array.categories_array); // 确保您在res/values/strings.xml中定义了categories_array
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
+//        categorySelector.setAdapter(adapter);
+//    }
 
     private void setupImageAddListener() {
         RelativeLayout pictureLayout = findViewById(R.id.add_point_picture_layout);
@@ -64,5 +65,11 @@ public class AddToiletActivity extends AppCompatActivity {
                 Toast.makeText(AddToiletActivity.this, "Location icon clicked", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void addToiletBtnClick(View view) {
+        Intent intent = new Intent(AddToiletActivity.this, MainpageActivity.class);
+//        intent.putExtra("json", json); // Replace 'jsonString' with your JSON string
+        startActivity(intent);
     }
 }

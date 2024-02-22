@@ -24,6 +24,7 @@
     <string name="header_email_str">點這裡</string>
     <string name="snack_disconnect_str">已斷開連接</string>
 
+    <string name="add_point_form_edit_str">修改</string>
     <string name="add_point_form_name_str">姓名</string>
     <string name="add_point_form_category_str">類別</string>
     <string name="add_point_form_location_str">GPS座標</string>

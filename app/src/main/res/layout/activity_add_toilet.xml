@@ -34,23 +34,41 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/add_point_selector_textLayout"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="16dp">-->
+
+<!--                <AutoCompleteTextView-->
+<!--                    android:id="@+id/add_point_selector_textView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="4dp"-->
+<!--                    android:hint="@string/add_point_form_category_str"-->
+<!--                    android:inputType="none"-->
+<!--                    android:labelFor="@id/add_point_selector_textLayout" />-->
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_point_selector_textLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:id="@+id/add_point_textLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp">
+                android:layout_marginEnd="16dp"
+                android:hint="@string/add_point_form_edit_str">
 
-                <AutoCompleteTextView
-                    android:id="@+id/add_point_selector_textView"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_point_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:hint="@string/add_point_form_category_str"
-                    android:inputType="none"
-                    android:labelFor="@id/add_point_selector_textLayout" />
+                    android:layout_marginBottom="4dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,6 +204,14 @@
                 android:text="@string/i_am_storekeeper_str"
                 app:buttonTint="@color/colorAccent"
                 tools:ignore="RtlSymmetry" />
+
+            <Button
+                android:id="@+id/btnAddToilet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Submit"
+                android:onClick="addToiletBtnClick" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -28,7 +28,7 @@ import okhttp3.Response;
 
 
 
-public class ForumActivity extends AppCompatActivity implements ThreadRecyclerViewAdapter.OnItemClickListener {
+public class ForumActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ThreadRecyclerViewAdapter adapter;
@@ -38,11 +38,11 @@ public class ForumActivity extends AppCompatActivity implements ThreadRecyclerVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        recyclerView = findViewById(R.id.ThreadListView);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ThreadRecyclerViewAdapter(this, threads);
-        adapter.setOnItemClickListener(this);
-        recyclerView.setAdapter(adapter);
+//        recyclerView.setAdapter(adapter);
 
         // Fetch the details as soon as the page loads
         getForumlList();
@@ -53,7 +53,7 @@ public class ForumActivity extends AppCompatActivity implements ThreadRecyclerVi
                 @Override
                 public void onClick(View v) {
                     // 启动 PostActivity
-                    Intent intent = new Intent(ForumActivity.this, PostActivity.class);
+                    Intent intent = new Intent(ForumActivity.this, AddPostActivity.class);
                     startActivity(intent);
                 }
             });
@@ -72,7 +72,7 @@ public class ForumActivity extends AppCompatActivity implements ThreadRecyclerVi
         }
     }
 
-    @Override
+
     public void onItemClick(ForumThread thread) {
         // Handle item click here
         // You can start a new activity or show a dialog with the thread details

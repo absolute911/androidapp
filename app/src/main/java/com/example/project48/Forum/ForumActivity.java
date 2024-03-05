@@ -1,13 +1,18 @@
 package com.example.project48.Forum;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project48.IntroActivity;
+import com.example.project48.LoginActivity;
 import com.example.project48.R;
 
 import org.json.JSONArray;
@@ -34,7 +39,6 @@ public class ForumActivity extends AppCompatActivity implements ThreadRecyclerVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum);
 
-        recyclerView = findViewById(R.id.ThreadListView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ThreadRecyclerViewAdapter(this, threads);
         adapter.setOnItemClickListener(this);
@@ -42,6 +46,30 @@ public class ForumActivity extends AppCompatActivity implements ThreadRecyclerVi
 
         // Fetch the details as soon as the page loads
         getForumlList();
+
+        Button buttonAddPost = findViewById(R.id.buttonAddPost);
+        if (buttonAddPost != null) {
+            buttonAddPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 启动 PostActivity
+                    Intent intent = new Intent(ForumActivity.this, PostActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
+        Button buttonShowPostComment = findViewById(R.id.buttonShowPostComment);
+        if (buttonShowPostComment != null) {
+            buttonShowPostComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 启动 PostAndCommentActivity
+                    Intent intent = new Intent(ForumActivity.this, PostAndCommentActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
@@ -91,4 +119,6 @@ public class ForumActivity extends AppCompatActivity implements ThreadRecyclerVi
             }
         }).start();
     }
+
+
 }

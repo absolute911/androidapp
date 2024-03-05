@@ -23,7 +23,7 @@ import okhttp3.Response;
 
 
 
-public class ForumActivity extends AppCompatActivity {
+public class ForumActivity extends AppCompatActivity implements ThreadRecyclerViewAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private ThreadRecyclerViewAdapter adapter;
@@ -37,10 +37,17 @@ public class ForumActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.ThreadListView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ThreadRecyclerViewAdapter(this, threads);
+        adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
         // Fetch the details as soon as the page loads
         getForumlList();
+    }
+
+    @Override
+    public void onItemClick(ForumThread thread) {
+        // Handle item click here
+        // You can start a new activity or show a dialog with the thread details
     }
 
     private void getForumlList() {

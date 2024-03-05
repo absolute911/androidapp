@@ -231,7 +231,7 @@
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="3dp"
                 android:background="@color/colorDivider"
                 app:layout_constraintTop_toBottomOf="@+id/activity_poi_action_linearLayout" />
 

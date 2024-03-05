@@ -13,9 +13,17 @@ import java.util.ArrayList;
 
 public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<ForumThread> threads;
+    private static ArrayList<ForumThread> threads;
 
+    private static OnItemClickListener listener;
 
+    public interface OnItemClickListener {
+        void onItemClick(ForumThread thread);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     // Constructor
     public ThreadRecyclerViewAdapter(ForumActivity context, ArrayList<ForumThread> threads) {
@@ -26,7 +34,6 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTitle;
         public TextView tvContent;
-
         public TextView tvID;
 
         public ViewHolder(View itemView) {
@@ -34,6 +41,19 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             tvTitle = itemView.findViewById(R.id.textViewTitle);
             tvContent = itemView.findViewById(R.id.textViewContent);
             tvID = itemView.findViewById(R.id.textViewID);
+
+            // Set click listener on the item view
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(threads.get(position));
+                        }
+                    }
+                }
+            });
         }
     }
 

@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project48.IntroActivity;
 import com.example.project48.LoginActivity;
 import com.example.project48.R;
+import android.app.Activity;
+import com.example.project48.Forum.ForumThread; // Replace with the actual package and class name
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +31,7 @@ import okhttp3.Response;
 
 
 public class ForumActivity extends AppCompatActivity implements ThreadRecyclerViewAdapter.OnItemClickListener {
-
+    private static final int REQUEST_ADD_POST = 1;
     private RecyclerView recyclerView;
     private ThreadRecyclerViewAdapter adapter;
     private ArrayList<ForumThread> threads = new ArrayList<>();
@@ -48,6 +50,32 @@ public class ForumActivity extends AppCompatActivity implements ThreadRecyclerVi
 
         // Fetch the details as soon as the page loads
         getForumlList();
+
+        Button btnAddPost = findViewById(R.id.btnAddPost);
+        btnAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open the add post activity
+                Intent intent = new Intent(ForumActivity.this, AddPostActivity.class);
+                startActivityForResult(intent, REQUEST_ADD_POST);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_ADD_POST && resultCode == Activity.RESULT_OK) {
+            String title = data.getStringExtra("title");
+            String content = data.getStringExtra("content");
+            String id = data.getStringExtra("id");
+
+            // Create a new ForumThread object with the entered title and content
+            ForumThread newThread = new ForumThread(title, content, id);
+            threads.add(0, newThread); // Add the new thread at the beginning of the list
+            adapter.notifyDataSetChanged();
+        }
     }
 
 

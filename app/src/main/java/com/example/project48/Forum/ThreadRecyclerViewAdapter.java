@@ -46,15 +46,11 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    if (listener != null) {
-//                        int position = getAdapterPosition();
-//                        if (position != RecyclerView.NO_POSITION) {
-//                            listener.onItemClick(threads.get(position));
-//                        }
-//                    }
-                    int position = getLayoutPosition();
-                    if (position != RecyclerView.NO_POSITION && listener != null) {
-                        listener.onItemClick(threads.get(position));
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(threads.get(position));
+                        }
                     }
                 }
             });

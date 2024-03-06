@@ -20,7 +20,7 @@
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             app:navigationIcon="@drawable/ic_baseline_close_24"
             app:menu="@menu/top_add__bar_add_point"
-            app:title="Add Post" />
+            app:title="Add Comment" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -44,16 +44,16 @@
                 android:layout_marginEnd="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_title_editText"
+                    android:id="@+id/add_name_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:hint="title" />
+                    android:hint="name" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_point_content_textLayout"
+                android:id="@+id/add_point_comment_textLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,11 +62,11 @@
                 android:layout_marginEnd="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_content_editText"
+                    android:id="@+id/add_comment_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:hint="content" />
+                    android:hint="comment" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,7 +83,7 @@
                 tools:ignore="RtlSymmetry" />
 
             <Button
-                android:id="@+id/btnAddPost"
+                android:id="@+id/btnAddComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"

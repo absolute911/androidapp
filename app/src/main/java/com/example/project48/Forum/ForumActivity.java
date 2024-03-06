@@ -28,7 +28,7 @@ import okhttp3.Response;
 
 
 
-public class ForumActivity extends AppCompatActivity {
+public class ForumActivity extends AppCompatActivity implements ThreadRecyclerViewAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private ThreadRecyclerViewAdapter adapter;
@@ -38,44 +38,23 @@ public class ForumActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum);
-//
-//        recyclerView = findViewById(R.id.ThreadListView);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ThreadRecyclerViewAdapter(this, threads);
-//        recyclerView.setAdapter(adapter);
+
+        recyclerView = findViewById(R.id.ThreadListView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter = new ThreadRecyclerViewAdapter(this, threads);
+        adapter = new ThreadRecyclerViewAdapter(threads);
+        adapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(adapter);
 
         // Fetch the details as soon as the page loads
         getForumlList();
-
-        Button buttonAddPost = findViewById(R.id.buttonAddPost);
-        if (buttonAddPost != null) {
-            buttonAddPost.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 启动 PostActivity
-                    Intent intent = new Intent(ForumActivity.this, AddPostActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
-
-        Button buttonShowPostComment = findViewById(R.id.buttonShowPostComment);
-        if (buttonShowPostComment != null) {
-            buttonShowPostComment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 启动 PostAndCommentActivity
-                    Intent intent = new Intent(ForumActivity.this, PostAndCommentActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
     }
 
 
     public void onItemClick(ForumThread thread) {
-        // Handle item click here
-        // You can start a new activity or show a dialog with the thread details
+        // Handle item click event
+        Intent intent = new Intent(this, PostAndCommentActivity.class);
+        startActivity(intent);
     }
 
     private void getForumlList() {

@@ -26,7 +26,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
     }
 
     // Constructor
-    public ThreadRecyclerViewAdapter(ForumActivity context, ArrayList<ForumThread> threads) {
+    public ThreadRecyclerViewAdapter(ArrayList<ForumThread> threads) {
         this.threads = threads;
     }
 
@@ -46,11 +46,15 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(threads.get(position));
-                        }
+//                    if (listener != null) {
+//                        int position = getAdapterPosition();
+//                        if (position != RecyclerView.NO_POSITION) {
+//                            listener.onItemClick(threads.get(position));
+//                        }
+//                    }
+                    int position = getLayoutPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onItemClick(threads.get(position));
                     }
                 }
             });
@@ -69,7 +73,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
     public void onBindViewHolder(ViewHolder holder, int position) {
         ForumThread thread = threads.get(position);
         holder.tvTitle.setText(thread.getTitle());
-        //holder.tvContent.setText(thread.getContent());
+        holder.tvContent.setText(thread.getContent());
         holder.tvID.setText(thread.getId());
     }
 

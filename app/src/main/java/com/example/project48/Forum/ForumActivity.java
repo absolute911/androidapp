@@ -44,7 +44,6 @@ public class ForumActivity extends AppCompatActivity {
 
     }
 
-
     private void getForumlList() {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
@@ -73,6 +72,16 @@ public class ForumActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             threads.clear();
                             threads.addAll(threadList);
+                            // Create the adapter and set the item click listener outside the loop
+                            ThreadRecyclerViewAdapter adapter = new ThreadRecyclerViewAdapter(this, threads, new ThreadRecyclerViewAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(ForumThread thread) {
+                                    // Handle the click event
+                                    // Example: open a new activity or show details
+                                    Log.d("Forum", "onItemClick: yoooooooooooooo");
+                                }
+                            });
+                            recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         });
                     } catch (JSONException e) {
@@ -86,4 +95,5 @@ public class ForumActivity extends AppCompatActivity {
             }
         }).start();
     }
+
 }

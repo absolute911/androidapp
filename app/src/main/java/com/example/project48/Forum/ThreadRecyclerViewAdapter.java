@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<ForumThread> threads;
+    private static ArrayList<ForumThread> threads;
 
 
 
@@ -26,24 +26,43 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTitle;
         public TextView tvContent;
-
         public TextView tvID;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.textViewTitle);
             tvContent = itemView.findViewById(R.id.textViewContent);
             tvID = itemView.findViewById(R.id.textViewID);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(threads.get(getAdapterPosition()));
+                    }
+                }
+            });
         }
+    }
+
+    private OnItemClickListener listener;
+
+    // Modify the constructor to include the listener parameter
+    public ThreadRecyclerViewAdapter(ForumActivity context, ArrayList<ForumThread> threads, OnItemClickListener listener) {
+        this.threads = threads;
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(ForumThread thread);
     }
 
     // Create new views (invoked by the layout manager)
     @Override
     public ThreadRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.threat_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, listener); // Pass the listener here
     }
-
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {

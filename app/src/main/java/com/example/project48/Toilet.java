@@ -11,12 +11,18 @@ public class Toilet implements Parcelable {
     private double distance;
     private String id;
 
+    private String open_hours;
+    private String address;
+
+
     // Constructor
-    public Toilet(int rating, String name, double distance, String id) {
+    public Toilet(int rating, String name, double distance, String id, String open_hours, String address) {
         this.rating = rating;
         this.name = name;
         this.distance = distance;
         this.id = id;
+        this.open_hours = open_hours;
+        this.address = address;
     }
 
     protected Toilet(Parcel in) {
@@ -24,6 +30,8 @@ public class Toilet implements Parcelable {
         name = in.readString();
         distance = in.readDouble();
         id = in.readString();
+        open_hours = in.readString();
+        address = in.readString();
     }
 
     public static final Creator<Toilet> CREATOR = new Creator<Toilet>() {
@@ -52,6 +60,14 @@ public class Toilet implements Parcelable {
     }
     public String getId(){return id;}
 
+    public String getOpen_hours() {
+        return open_hours;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -63,5 +79,9 @@ public class Toilet implements Parcelable {
         parcel.writeString(name);
         parcel.writeDouble(distance);
         parcel.writeString(id);
+        parcel.writeString(open_hours);
+        parcel.writeString(address);
+
+
     }
 }

@@ -128,6 +128,7 @@ public class UserCommentActivity extends AppCompatActivity {
         if (json != null) {
             try {
                 nearestToilet = new JSONObject(json);
+                Log.d("getDataFromIntent", "getDataFromIntent: " + nearestToilet);
                 JSONObject toiletObject = nearestToilet.getJSONObject("nearestToilet");
                 toiletName  = toiletObject.getString("name");
                 toiletID = toiletObject.getString("_id");

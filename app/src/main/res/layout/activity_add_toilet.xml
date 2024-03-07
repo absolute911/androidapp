@@ -189,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:editable="true"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>

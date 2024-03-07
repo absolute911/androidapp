@@ -35,6 +35,10 @@ public class detailActivity extends AppCompatActivity {
 
     private String json;
 
+    private String ToiletID = "";
+
+    private Toilet selectedToilet;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -42,10 +46,10 @@ public class detailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_point_detail);
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            Toilet selectedToilet = intent.getParcelableExtra("toilet");
-            // Use the selectedToilet object as needed
+        try{
+            getIntentId();
+        }catch (Exception e){
+
         }
 
         poi_detail_name_textView = findViewById(R.id.poi_detail_name_textView); // Make sure to replace 'your_text_view_id' with the actual ID of your TextView in the layout.
@@ -67,7 +71,62 @@ public class detailActivity extends AppCompatActivity {
         double lon = Double.parseDouble(longitude);
 
         // Fetch the details as soon as the page loads
-        getDetail(lat, lon);
+        if (ToiletID == ""){
+            getDetail(lat, lon);
+        }
+        else{
+            getDetailById(lat, lon);
+            Log.d("selectedToilet", "onCreate: getting");
+        }
+    }
+
+    private void getDetailById( double latitude, double longitude) {
+        new Thread(() -> {
+            OkHttpClient client = new OkHttpClient();
+            String url = "http://192.168.50.143:3000/items/getToiletById/" + ToiletID + "?latitude=" + latitude + "&longitude=" + longitude;
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            try (Response response = client.newCall(request).execute()) {
+                final String responseBody = response.body() != null ? response.body().string() : null;
+                runOnUiThread(() -> {
+                    if (response.isSuccessful() && responseBody != null) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(responseBody);
+                            if (jsonObject.has("nearestToilet")) {
+                                JSONObject toiletDetailObject = jsonObject.getJSONObject("nearestToilet");
+                                json = jsonObject.toString();
+                                String name = toiletDetailObject.getString("name");
+                                String open_hours = toiletDetailObject.getString("open_hours");
+                                String address = toiletDetailObject.getString("address");
+                                String distance = jsonObject.getString("distance"); // If distance is relevant for this call
+                                String rating = toiletDetailObject.getString("rating");
+                                // Update the UI
+                                poi_detail_name_textView.setText(name);
+                                activity_poi_last_opentime_textView.setText(open_hours);
+                                activity_poi_location_textView.setText(address);
+                                activity_poi_distance_textView.setText(distance); // If you're showing distance
+                                point_detail_rating_text.setText("評分" + rating);
+
+                            } else {
+                                // Handle the case where the "toiletDetail" key is missing in the JSON response
+                                // You can show an error message or handle it as needed
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            // Handle JSON parsing errors
+                        }
+
+                    } else {
+                        Toast.makeText(detailActivity.this, "fetch fail", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private void getDetail(double latitude, double longitude) {
@@ -127,6 +186,16 @@ public class detailActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    private void getIntentId() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            selectedToilet = intent.getParcelableExtra("toilet");
+            Log.d("selectedToilet", "selectedToilet: " + selectedToilet.getId() + selectedToilet.getName());
+            ToiletID = selectedToilet.getId();
+        }
+    }
+
 
     public void directionPointBtnClick(View view) {
         Intent intent = new Intent(detailActivity.this, MapActivity.class);

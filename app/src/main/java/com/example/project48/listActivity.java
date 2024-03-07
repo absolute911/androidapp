@@ -63,7 +63,10 @@ public class listActivity extends AppCompatActivity {
                                         jsonObject.getInt("rating"),
                                         jsonObject.getString("name"),
                                         jsonObject.getDouble("distance"),
-                                        jsonObject.getString("_id")
+                                        jsonObject.getString("_id"),
+                                        jsonObject.getString("open_hours"),
+                                        jsonObject.getString("address")
+
                                 );
                                 toiletList.add(toilet);
                             }

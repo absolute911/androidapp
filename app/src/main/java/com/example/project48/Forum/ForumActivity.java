@@ -41,7 +41,9 @@ public class ForumActivity extends AppCompatActivity {
 
         // Fetch the details as soon as the page loads
         getForumlList();
+
     }
+
 
     private void getForumlList() {
         new Thread(() -> {

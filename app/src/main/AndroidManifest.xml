@@ -51,7 +51,6 @@
         <activity android:name=".MapActivity3" />
         <activity android:name=".MapActivity4" />
 
-        <activity android:name=".Forum.PostActivity" />
         <activity android:name=".Forum.AddPostActivity" />
         <activity android:name=".Forum.PostAndCommentActivity" />
 

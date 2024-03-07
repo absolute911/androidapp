@@ -37,11 +37,11 @@ public class PostAndCommentActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_COMMENT_REQUEST_CODE && resultCode == RESULT_OK) {
-            String username = data.getStringExtra("username");
+//            String username = data.getStringExtra("username");
             String comment = data.getStringExtra("comment");
 
             if (comment != null && !comment.isEmpty()) {
-                String updatedComment = username + ": " + comment;
+                String updatedComment = comment;
                 commentContentTextView.setText(updatedComment);
             }
         }

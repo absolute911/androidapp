@@ -22,6 +22,12 @@
         </activity>
 
         <!-- 其他活动定义 -->
+        <activity android:name=".Forum.ForumPostActivity">
+            <!-- Add any intent filters if needed -->
+        </activity>
+        <activity android:name=".Forum.AddPostActivity">
+            <!-- Add any intent filters if needed -->
+        </activity>
         <activity android:name=".Forum.ForumActivity">
             <!-- Add any intent filters if needed -->
         </activity>

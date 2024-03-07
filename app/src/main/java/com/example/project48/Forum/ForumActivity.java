@@ -1,13 +1,17 @@
 package com.example.project48.Forum;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project48.MainpageActivity;
 import com.example.project48.R;
 
 import org.json.JSONArray;
@@ -28,6 +32,7 @@ public class ForumActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ThreadRecyclerViewAdapter adapter;
     private ArrayList<ForumThread> threads = new ArrayList<>();
+    private Button button_add_new_post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,14 @@ public class ForumActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ThreadRecyclerViewAdapter(this, threads);
         recyclerView.setAdapter(adapter);
+        button_add_new_post = findViewById(R.id.button_add_new_post);
+        button_add_new_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ForumActivity.this, AddPostActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Fetch the details as soon as the page loads
         getForumlList();
@@ -78,7 +91,8 @@ public class ForumActivity extends AppCompatActivity {
                                 public void onItemClick(ForumThread thread) {
                                     // Handle the click event
                                     // Example: open a new activity or show details
-                                    Log.d("Forum", "onItemClick: yoooooooooooooo");
+                                    Intent intent = new Intent(ForumActivity.this, ForumPostActivity.class);
+                                    startActivity(intent);
                                 }
                             });
                             recyclerView.setAdapter(adapter);

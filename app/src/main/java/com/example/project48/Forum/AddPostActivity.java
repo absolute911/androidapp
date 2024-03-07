@@ -22,6 +22,8 @@ public class AddPostActivity extends AppCompatActivity {
 
     private EditText addTextTitle;
     private EditText addTextContent;
+
+    private EditText addTextId;
     private Button buttonSubmit;
 
     @Override
@@ -29,6 +31,7 @@ public class AddPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.row_add_post);
 
+        addTextId = findViewById(R.id.add_id_editText);
         addTextTitle = findViewById(R.id.add_title_editText);
         addTextContent = findViewById(R.id.add_content_editText);
         buttonSubmit = findViewById(R.id.btnAddPost);
@@ -36,6 +39,7 @@ public class AddPostActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String id = addTextId.getText().toString();
                 String title = addTextTitle.getText().toString();
                 String content = addTextContent.getText().toString();
 
@@ -44,6 +48,7 @@ public class AddPostActivity extends AppCompatActivity {
                 } else {
                     // Pass the entered title and content back to the ForumActivity
                     Intent resultIntent = new Intent();
+                    resultIntent.putExtra("id", id);
                     resultIntent.putExtra("title", title);
                     resultIntent.putExtra("content", content);
                     setResult(Activity.RESULT_OK, resultIntent);

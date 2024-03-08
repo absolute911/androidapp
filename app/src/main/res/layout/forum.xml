@@ -10,6 +10,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/add_post_barLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/add_post_toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                app:navigationIcon="@drawable/ic_baseline_close_24"
+                app:menu="@menu/top_add__bar_add_point"
+                app:title="Show Post" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
         <Button
             android:id="@+id/button_add_new_post"
             android:layout_width="wrap_content"

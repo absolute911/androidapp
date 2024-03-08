@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +45,18 @@ public class ForumActivity extends AppCompatActivity {
         adapter = new ThreadRecyclerViewAdapter(this, threads);
         recyclerView.setAdapter(adapter);
         button_add_new_post = findViewById(R.id.button_add_new_post);
+
+        // 设置 Toolbar
+        Toolbar toolbar = findViewById(R.id.add_post_toolBar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // 关闭当前 Activity
+            }
+        });
+
+
         button_add_new_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,6 +59,16 @@ public class detailActivity extends AppCompatActivity {
         point_detail_report_text = findViewById(R.id.point_detail_report_text);
         activity_poi_distance_textView = findViewById(R.id.activity_poi_distance_textView);
         point_detail_rating_text = findViewById(R.id.point_detail_rating_text);
+
+        // 设置 Toolbar
+        Toolbar toolbar = findViewById(R.id.point_detail_toolBar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // 关闭当前 Activity
+            }
+        });
 
         point_detail_report_text.setOnClickListener(new View.OnClickListener() {
             @Override

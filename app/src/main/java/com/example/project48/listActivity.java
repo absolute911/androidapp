@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,17 @@ public class listActivity extends AppCompatActivity {
 
         // Fetch the details as soon as the page loads
         getDetailList(lat, lon);
+
+
+        // 设置 Toolbar
+        Toolbar toolbar = findViewById(R.id.add_list_barLayout);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // 关闭当前 Activity
+            }
+        });
 
     }
 

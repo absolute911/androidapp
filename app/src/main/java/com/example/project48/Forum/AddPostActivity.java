@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,16 @@ public class AddPostActivity extends AppCompatActivity {
         addTextTitle = findViewById(R.id.add_title_editText);
         addTextContent = findViewById(R.id.add_content_editText);
         buttonSubmit = findViewById(R.id.btnAddPost);
+
+        // 设置 Toolbar
+        Toolbar toolbar = findViewById(R.id.add_point_toolBar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // 关闭当前 Activity
+            }
+        });
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/add_point_barLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/add_list_barLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                app:navigationIcon="@drawable/ic_baseline_close_24"
+                app:menu="@menu/top_add__bar_add_point"
+                app:title="Show list" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
 
     <EditText
         android:id="@+id/searchEditText"
@@ -16,4 +40,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/searchEditText" />
 
+</LinearLayout>
 </RelativeLayout>

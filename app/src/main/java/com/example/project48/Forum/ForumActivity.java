@@ -84,7 +84,6 @@ public class ForumActivity extends AppCompatActivity {
                 if (response.isSuccessful() && responseBody != null) {
                     try {
                         JSONArray jsonArray = new JSONArray(responseBody);
-                        Log.d("getForumlList", "getForumlList: " + jsonArray.getJSONObject(0));
                         ArrayList<ForumThread> threadList = new ArrayList<>();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -98,13 +97,12 @@ public class ForumActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             threads.clear();
                             threads.addAll(threadList);
-                            // Create the adapter and set the item click listener outside the loop
                             ThreadRecyclerViewAdapter adapter = new ThreadRecyclerViewAdapter(this, threads, new ThreadRecyclerViewAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(ForumThread thread) {
-                                    // Handle the click event
-                                    // Example: open a new activity or show details
+                                    Log.d("Thread ID", "Clicked Thread ID: " + thread.getId()); // Check the thread ID
                                     Intent intent = new Intent(ForumActivity.this, ForumPostActivity.class);
+                                    intent.putExtra("_id", thread.getId());
                                     startActivity(intent);
                                 }
                             });
@@ -122,5 +120,6 @@ public class ForumActivity extends AppCompatActivity {
             }
         }).start();
     }
-
 }
+
+

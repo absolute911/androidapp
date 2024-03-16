@@ -87,7 +87,6 @@ public class detailActivity extends AppCompatActivity {
         }
         else{
             getDetailById(lat, lon);
-            Log.d("selectedToilet", "onCreate: getting");
         }
     }
 
@@ -202,7 +201,6 @@ public class detailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             selectedToilet = intent.getParcelableExtra("toilet");
-            Log.d("selectedToilet", "selectedToilet: " + selectedToilet.getId() + selectedToilet.getName());
             ToiletID = selectedToilet.getId();
         }
     }

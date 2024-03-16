@@ -2,34 +2,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/p"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".Forum.ForumPostActivity">
 
     <TextView
+        android:id="@+id/postTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Post Content Here"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
         android:id="@+id/postContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Post Content Here"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:padding="8dp"/>
+        android:layout_below="@id/postTitle"
+        android:layout_marginTop="16dp"
+        android:text="Additional Text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <ListView
         android:id="@+id/commentsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/postContent"
-        android:layout_above="@+id/addCommentButton"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="0.5dp"
-        android:layout_marginTop="16dp"/>
+    android:layout_above="@+id/addCommentButton"
+    android:divider="@android:color/darker_gray"
+    android:dividerHeight="0.5dp"
+    android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/addCommentButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Add Comment"/>
+        android:text="Add Comment" />
 
 </RelativeLayout>

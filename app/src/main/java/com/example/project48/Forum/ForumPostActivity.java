@@ -1,6 +1,8 @@
 package com.example.project48.Forum;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,28 +12,45 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project48.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ForumPostActivity extends AppCompatActivity {
 
     private TextView postContent;
+    private TextView postTitle;
     private ListView commentsList;
     private Button addCommentButton;
     private ArrayList<String> comments;
     private ArrayAdapter<String> commentsAdapter;
+    private String _id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_post);
 
+        try{
+            getIntentId();
+        }catch(Exception e){
+
+        }
+        getForumThreadDetails(_id);
+
         // Initialize views
         postContent = findViewById(R.id.postContent);
         commentsList = findViewById(R.id.commentsList);
         addCommentButton = findViewById(R.id.addCommentButton);
+        postTitle = findViewById(R.id.postTitle);
 
-        // Example post content
-        postContent.setText("This is an example of a forum post content.");
 
         // Initialize comments list with mock data
         initializeCommentsList();
@@ -48,19 +67,62 @@ public class ForumPostActivity extends AppCompatActivity {
 
     private void initializeCommentsList() {
         comments = new ArrayList<>();
-        // Adding some mock comments
-        comments.add("Great post!");
-        comments.add("Very informative, thanks for sharing.");
-        comments.add("I have a question about this.");
-
-        // Setting up adapter for ListView
         commentsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, comments);
         commentsList.setAdapter(commentsAdapter);
     }
 
+    private void getForumThreadDetails(String threadId) {
+        new Thread(() -> {
+            OkHttpClient client = new OkHttpClient();
+            String url = "http://192.168.50.143:3000/thread/" + threadId;
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+            try (Response response = client.newCall(request).execute()) {
+                final String responseBody = response.body() != null ? response.body().string() : null;
+                if (response.isSuccessful() && responseBody != null) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(responseBody);
+                        JSONArray commentsArray = jsonObject.getJSONArray("comments");
+
+                        // Example post content
+                        postContent.setText(jsonObject.getString("content"));
+                        postTitle.setText(jsonObject.getString("title"));
+
+                        for (int i = 0; i < commentsArray.length(); i++) {
+                            JSONObject commentObject = commentsArray.getJSONObject(i);
+                            String commentText = commentObject.getString("text");
+                            addNewComment(commentText);
+                            Log.d("commentText", "getForumThreadDetails: " + commentText);
+                        }
+
+                        runOnUiThread(() -> {
+                            commentsAdapter.notifyDataSetChanged();
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        // Handle error
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle error
+            }
+        }).start();
+    }
     private void addNewComment(String comment) {
         // Add comment to the list and notify the adapter
         comments.add(comment);
         commentsAdapter.notifyDataSetChanged();
+    }
+
+    private void getIntentId() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            _id = intent.getStringExtra("_id");
+            Log.d("_id", "Retrieved ID: " + _id); // Check the value after retrieving it
+        }
     }
 }

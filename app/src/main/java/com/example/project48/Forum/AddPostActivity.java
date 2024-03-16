@@ -17,7 +17,16 @@ import com.example.project48.R;
 import com.example.project48.SessionManager;
 import com.example.project48.UserCommentAdapter;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -26,6 +35,8 @@ public class AddPostActivity extends AppCompatActivity {
 
     private EditText addTextId;
     private Button buttonSubmit;
+    private String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,9 @@ public class AddPostActivity extends AppCompatActivity {
         addTextTitle = findViewById(R.id.add_title_editText);
         addTextContent = findViewById(R.id.add_content_editText);
         buttonSubmit = findViewById(R.id.btnAddPost);
+
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        username = sessionManager.getUsername();
 
         // 设置 Toolbar
         Toolbar toolbar = findViewById(R.id.add_point_toolBar);
@@ -55,14 +69,42 @@ public class AddPostActivity extends AppCompatActivity {
                 if (title.isEmpty() || content.isEmpty()) {
                     Toast.makeText(AddPostActivity.this, "Please enter title and content", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Pass the entered title and content back to the ForumActivity
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra("title", title);
-                    resultIntent.putExtra("content", content);
-                    setResult(Activity.RESULT_OK, resultIntent);
+                    createNewPost(title, content);
                     finish();
                 }
             }
         });
+    }
+
+    private void createNewPost(String title, String content) {
+        new Thread(() -> {
+            OkHttpClient client = new OkHttpClient();
+            String url = "http://192.168.50.143:3000/thread";
+
+            // Create a JSON object with the request data
+            JSONObject requestBody = new JSONObject();
+            try {
+                requestBody.put("title", title);
+                requestBody.put("content", content);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                // Handle error
+            }
+
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody body = RequestBody.create(requestBody.toString(), JSON);
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+
+            try (Response response = client.newCall(request).execute()) {
+                // Handle response if needed
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle error
+            }
+        }).start();
     }
 }

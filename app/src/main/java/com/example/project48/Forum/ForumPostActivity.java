@@ -59,8 +59,9 @@ public class ForumPostActivity extends AppCompatActivity {
         addCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Example action: Add a new comment
-                addNewComment("New comment " + (comments.size() + 1));
+                Intent intent = new Intent(ForumPostActivity.this, AddCommentToPostActivity.class);
+                intent.putExtra("_id", _id);
+                startActivity(intent);
             }
         });
     }

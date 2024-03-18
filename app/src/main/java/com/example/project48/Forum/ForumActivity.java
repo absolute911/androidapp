@@ -51,15 +51,15 @@ public class ForumActivity extends AppCompatActivity implements ThreadRecyclerVi
         // Fetch the details as soon as the page loads
         getForumlList();
 
-        Button btnAddPost = findViewById(R.id.btnAddPost);
-        btnAddPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open the add post activity
-                Intent intent = new Intent(ForumActivity.this, AddPostActivity.class);
-                startActivityForResult(intent, REQUEST_ADD_POST);
-            }
-        });
+//        Button btnAddPost = findViewById(R.id.btnAddPost);
+//        btnAddPost.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Open the add post activity
+//                Intent intent = new Intent(ForumActivity.this, AddPostActivity.class);
+//                startActivityForResult(intent, REQUEST_ADD_POST);
+//            }
+//        });
     }
 
     @Override

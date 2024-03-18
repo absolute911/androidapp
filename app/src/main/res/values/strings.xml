@@ -16,11 +16,14 @@
     <string name="item_toilette_str">洗手間</string>
     <string name="item_bin_str">垃圾桶</string>
     <string name="menu_title">要顯示的項目：</string>
+    <string name="menu_login">登入已解鎖更多功能</string>
     <string name="icon_description_str">圖示說明</string>
     <string name="recycler_item_first_line_str">第一行</string>
     <string name="recycler_item_meta_str">meta</string>
     <string name="recycler_item_second_line_str">第二行</string>
     <string name="header_name_str">登入/註冊</string>
+    <string name="header_login_str">登入</string>
+    <string name="header_signup_str">註冊</string>
     <string name="header_email_str">點這裡</string>
     <string name="snack_disconnect_str">已斷開連接</string>
 
@@ -112,5 +115,8 @@
     <string name="radio_button_point_bad_maintenance_str">維護不當</string>
     <string name="add_point_name_error_str">請提供姓名</string>
     <string name="overflow">Overflow</string>
+    <string name="loginsignup">loginsignup</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,9 +1,8 @@
-package com.example.project48;
+package com.example.project48.detail;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,13 +10,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.project48.Login.URL;
+import com.example.project48.MapActivity;
+import com.example.project48.R;
+import com.example.project48.Toilet;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
@@ -40,7 +42,7 @@ public class detailActivity extends AppCompatActivity {
 
     private Toilet selectedToilet;
 
-    private URL URL = new URL();
+    private com.example.project48.Login.URL URL = new URL();
 
 
     @SuppressLint("MissingInflatedId")

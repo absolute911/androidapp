@@ -1,25 +1,26 @@
-package com.example.project48;
+package com.example.project48.detail;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.project48.Login.SessionManager;
+import com.example.project48.Login.URL;
+import com.example.project48.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -38,7 +39,7 @@ public class UserCommentActivity extends AppCompatActivity {
     private String toiletName, toiletID;
     private RatingBar ratingBar;
     private String username;
-    private URL URL = new URL();
+    private com.example.project48.Login.URL URL = new URL();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

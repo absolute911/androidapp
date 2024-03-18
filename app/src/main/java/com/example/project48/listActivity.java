@@ -1,18 +1,19 @@
 package com.example.project48;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 //<<<<<<< HEAD
 import android.view.View;
 //=======
-import android.util.Log;
 //>>>>>>> origin/master
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.project48.Login.URL;
+import com.example.project48.detail.detailActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

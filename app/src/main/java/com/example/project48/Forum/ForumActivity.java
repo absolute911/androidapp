@@ -5,16 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project48.MainpageActivity;
 import com.example.project48.R;
-import com.example.project48.URL;
+import com.example.project48.Login.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;

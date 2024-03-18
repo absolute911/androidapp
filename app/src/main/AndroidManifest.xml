@@ -40,9 +40,9 @@
             <!-- Add any intent filters if needed -->
         </activity>
         <activity
-            android:name=".UserCommentActivity">
+            android:name=".detail.UserCommentActivity">
         </activity>
-        <activity android:name=".detailActivity">
+        <activity android:name=".detail.detailActivity">
             <!-- Add any intent filters if needed -->
         </activity>
         <activity android:name=".listActivity">
@@ -51,11 +51,11 @@
         <activity android:name=".MainpageActivity">
             <!-- Add any intent filters if needed -->
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Login.LoginActivity">
             <!-- Add any intent filters if needed -->
         </activity>
         <activity android:name=".IntroActivity" />
-        <activity android:name="SignupActivity" />
+        <activity android:name=".Login.SignupActivity" />
         <!-- 如有其他活动，继续在此处添加 -->
         <activity android:name=".MapActivity" />
         <activity android:name=".MapActivity2" />

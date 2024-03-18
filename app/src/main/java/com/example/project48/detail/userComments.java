@@ -1,4 +1,4 @@
-package com.example.project48;
+package com.example.project48.detail;
 
 public class userComments {
 

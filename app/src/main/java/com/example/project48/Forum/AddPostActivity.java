@@ -1,7 +1,5 @@
 package com.example.project48.Forum;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,13 +8,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project48.R;
-import com.example.project48.SessionManager;
-import com.example.project48.URL;
-import com.example.project48.UserCommentAdapter;
+import com.example.project48.Login.SessionManager;
+import com.example.project48.Login.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;

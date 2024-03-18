@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project48.MainpageActivity;
 import com.example.project48.R;
+import com.example.project48.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,7 +74,8 @@ public class ForumActivity extends AppCompatActivity {
     private void getForumlList() {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/getAllThreads";
+            URL URL = new URL();
+            String url = URL.getURL() + "getAllThreads";
 
             Request request = new Request.Builder()
                     .url(url)

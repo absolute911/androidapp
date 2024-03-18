@@ -91,10 +91,11 @@ public class SignupActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(SignupActivity.this, "Error creating JSON for registration", Toast.LENGTH_SHORT).show());
                 return;
             }
-
+            URL URL = new URL();
+            String url = URL.getURL() + "signup";
             RequestBody body = RequestBody.create(jsonObject.toString(), JSON);
             Request request = new Request.Builder()
-                    .url("http://192.168.50.143:3000/signup")
+                    .url(url)
                     .post(body)
                     .build();
 

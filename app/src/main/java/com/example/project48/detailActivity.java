@@ -40,6 +40,8 @@ public class detailActivity extends AppCompatActivity {
 
     private Toilet selectedToilet;
 
+    private URL URL = new URL();
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -93,7 +95,7 @@ public class detailActivity extends AppCompatActivity {
     private void getDetailById( double latitude, double longitude) {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/items/getToiletById/" + ToiletID + "?latitude=" + latitude + "&longitude=" + longitude;
+            String url = URL.getURL() + "items/getToiletById/" + ToiletID + "?latitude=" + latitude + "&longitude=" + longitude;
             Request request = new Request.Builder()
                     .url(url)
                     .get()
@@ -142,7 +144,7 @@ public class detailActivity extends AppCompatActivity {
     private void getDetail(double latitude, double longitude) {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/items/nearest?latitude=" + latitude + "&longitude=" + longitude;
+            String url = URL.getURL() + "items/nearest?latitude=" + latitude + "&longitude=" + longitude;
             Request request = new Request.Builder()
                     .url(url)
                     .get()

@@ -72,10 +72,12 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Error creating JSON", Toast.LENGTH_SHORT).show());
                 return; // Stop further execution in case of JSON exception
             }
+            URL URL = new URL();
+            String url = URL.getURL() + "login";
 
             RequestBody body = RequestBody.create(jsonObject.toString(), JSON);
             Request request = new Request.Builder()
-                    .url("http://192.168.50.143:3000/login")
+                    .url(url)
                     .post(body)
                     .build();
 

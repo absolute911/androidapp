@@ -104,7 +104,8 @@ public class AddToiletActivity extends AppCompatActivity {
     private void addToilet(String name, String address, String open_hours, String coordinates) {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/addToilet";
+            URL URL = new URL();
+            String url = URL.getURL() + "addToilet";
 
             // Create a JSON object with the comment data
             JSONObject toiletJson = new JSONObject();

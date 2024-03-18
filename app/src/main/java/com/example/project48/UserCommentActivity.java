@@ -38,6 +38,7 @@ public class UserCommentActivity extends AppCompatActivity {
     private String toiletName, toiletID;
     private RatingBar ratingBar;
     private String username;
+    private URL URL = new URL();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +85,9 @@ public class UserCommentActivity extends AppCompatActivity {
 
     private void postToiletComment(int rating, String username, String text) {
         new Thread(() -> {
+
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/addToiletComment/" + toiletID;
+            String url = URL.getURL() + "addToiletComment/" + toiletID;
 
             // Create a JSON object with the comment data
             JSONObject commentJson = new JSONObject();
@@ -145,7 +147,7 @@ public class UserCommentActivity extends AppCompatActivity {
     private void getCommentList() {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/getToiletComment/" + toiletID;
+            String url = URL.getURL() + "getToiletComment/" + toiletID;
 
             Request request = new Request.Builder()
                     .url(url)

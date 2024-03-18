@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project48.R;
 import com.example.project48.SessionManager;
+import com.example.project48.URL;
 import com.example.project48.UserCommentAdapter;
 
 import org.json.JSONException;
@@ -79,7 +80,8 @@ public class AddPostActivity extends AppCompatActivity {
     private void createNewPost(String title, String content) {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/thread";
+            URL URL = new URL();
+            String url = URL.getURL() + "thread";
 
             // Create a JSON object with the request data
             JSONObject requestBody = new JSONObject();

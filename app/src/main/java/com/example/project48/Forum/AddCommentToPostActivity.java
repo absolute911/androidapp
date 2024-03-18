@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project48.R;
 import com.example.project48.SessionManager;
+import com.example.project48.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +61,8 @@ public class AddCommentToPostActivity extends AppCompatActivity {
     private void sendCommentRequest(String commentText) {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/thread/" + _id + "/comment";
+            URL URL = new URL();
+            String url = URL.getURL() + "thread/" + _id + "/comment";
 
             // Create a JSON object with the comment data
             JSONObject requestBody = new JSONObject();

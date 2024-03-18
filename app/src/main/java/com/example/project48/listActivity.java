@@ -55,7 +55,9 @@ public class listActivity extends AppCompatActivity {
     private void getDetailList(double latitude, double longitude) {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/items/list?latitude=" + latitude + "&longitude=" + longitude;
+            URL URL = new URL();
+
+            String url = URL.getURL() + "items/list?latitude=" + latitude + "&longitude=" + longitude;
 
             Request request = new Request.Builder()
                     .url(url)

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project48.R;
+import com.example.project48.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,7 +76,8 @@ public class ForumPostActivity extends AppCompatActivity {
     private void getForumThreadDetails(String threadId) {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
-            String url = "http://192.168.50.143:3000/thread/" + threadId;
+            URL URL = new URL();
+            String url = URL.getURL() + "thread/" + threadId;
 
             Request request = new Request.Builder()
                     .url(url)

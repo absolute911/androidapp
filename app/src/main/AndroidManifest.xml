@@ -60,7 +60,6 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".MapActivity2" />
         <activity android:name=".MapActivity3" />
-        <activity android:name=".MapActivity4" />
 
 
         <meta-data

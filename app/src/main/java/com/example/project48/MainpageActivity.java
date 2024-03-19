@@ -15,7 +15,7 @@ import android.widget.PopupMenu; // 導入 PopupMenu 類
 import android.widget.TextView;
 
 import com.example.project48.Forum.ForumActivity;
-import com.example.project48.Login.SessionManager;
+import com.example.project48.misc.SessionManager;
 import com.example.project48.detail.detailActivity;
 
 public class MainpageActivity extends AppCompatActivity {

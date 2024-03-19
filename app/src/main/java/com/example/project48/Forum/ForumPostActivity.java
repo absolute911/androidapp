@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project48.R;
-import com.example.project48.Login.URL;
+import com.example.project48.misc.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project48.Login.SessionManager;
-import com.example.project48.Login.URL;
+import com.example.project48.misc.SessionManager;
+import com.example.project48.misc.URL;
 import com.example.project48.R;
 
 import org.json.JSONArray;
@@ -39,7 +39,7 @@ public class UserCommentActivity extends AppCompatActivity {
     private String toiletName, toiletID;
     private RatingBar ratingBar;
     private String username;
-    private com.example.project48.Login.URL URL = new URL();
+    private com.example.project48.misc.URL URL = new URL();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

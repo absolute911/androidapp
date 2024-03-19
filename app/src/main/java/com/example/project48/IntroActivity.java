@@ -7,7 +7,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project48.Login.LoginActivity;
-import com.example.project48.Login.SessionManager;
+import com.example.project48.misc.SessionManager;
 import com.example.project48.Login.SignupActivity;
 
 public class IntroActivity extends AppCompatActivity {

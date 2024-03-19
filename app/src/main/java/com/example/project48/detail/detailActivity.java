@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.project48.Login.URL;
+import com.example.project48.misc.URL;
 import com.example.project48.MapActivity;
 import com.example.project48.R;
 import com.example.project48.Toilet;
@@ -42,7 +42,7 @@ public class detailActivity extends AppCompatActivity {
 
     private Toilet selectedToilet;
 
-    private com.example.project48.Login.URL URL = new URL();
+    private com.example.project48.misc.URL URL = new URL();
 
 
     @SuppressLint("MissingInflatedId")

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project48.R;
+import com.example.project48.misc.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;

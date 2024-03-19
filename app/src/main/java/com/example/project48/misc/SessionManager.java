@@ -1,4 +1,4 @@
-package com.example.project48.Login;
+package com.example.project48.misc;
 
 import android.content.Context;
 import android.content.SharedPreferences;

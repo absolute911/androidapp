@@ -10,7 +10,6 @@ public class Toilet implements Parcelable {
     private String name;
     private double distance;
     private String id;
-
     private String open_hours;
     private String address;
 

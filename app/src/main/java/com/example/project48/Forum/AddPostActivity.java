@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.project48.R;
-import com.example.project48.Login.SessionManager;
-import com.example.project48.Login.URL;
+import com.example.project48.misc.SessionManager;
+import com.example.project48.misc.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;

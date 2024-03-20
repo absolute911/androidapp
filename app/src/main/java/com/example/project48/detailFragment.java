@@ -2,9 +2,9 @@ package com.example.project48;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,32 +15,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.project48.R;
-import com.google.android.gms.maps.CameraUpdate;
+import com.example.project48.Login.LoginActivity;
+import com.example.project48.Login.SignupActivity;
+import com.example.project48.detail.detailActivity;
+import com.example.project48.misc.SessionManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -49,20 +42,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 public class detailFragment extends Fragment implements OnMapReadyCallback {
 
     private MapView mapView;
 
-    private EditText searchEditText;
+    private SearchView searchView;
 
     private GoogleMap googleMap;
 
     private JSONObject nearestToilet;
 
     private LatLngBounds hongKongBounds;
+
+    private Geocoder geocoder;
+    private Marker searchMarker;
 
     @Nullable
     @Override
@@ -73,10 +69,27 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        searchEditText = view.findViewById(R.id.searchEditText);
+        searchView = view.findViewById(R.id.idSearchView);
         mapView = view.findViewById(R.id.mapView);
+        geocoder = new Geocoder(requireContext());
 
-        // 設置 Toolbar
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                String locationName = query.trim();
+                searchLocation(locationName);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+
+
+    // 設置 Toolbar
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         // Set the toolbar as the activity's support action bar
         Activity activity = getActivity();
@@ -176,39 +189,67 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_loginsignup, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("MainActivity", "onOptionsItemSelected: item selected " + item.getItemId());
+        Log.d("detailFragment", "onOptionsItemSelected: item selected " + item.getItemId());
         switch (item.getItemId()) {
-            case R.id.action_login_signup:
-                showPopupMenu();
+            case R.id.action_overflow:
+                View menuView = getActivity().findViewById(R.id.action_overflow); // Replace with the correct view ID
+                SessionManager sessionManager = new SessionManager(getActivity());
+                showPopupMenu(menuView, sessionManager, getActivity());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    protected void showPopupMenu(View menuView, SessionManager sessionManager, Activity activity) {
+        PopupMenu popup = new PopupMenu(getContext(), menuView);
 
-    // 實現顯示彈出菜單的邏輯
-    private void showPopupMenu() {
-        Log.d("MainActivity", "showPopupMenu: Showing popup menu");
-        View menuView = getView().findViewById(R.id.action_login_signup);
-        PopupMenu popup = new PopupMenu(requireContext(), menuView);
-        popup.getMenuInflater().inflate(R.menu.login_navigation_menu, popup.getMenu());
+        boolean isLoggedIn = sessionManager.isLoggedIn();
+
+        if (isLoggedIn) {
+            popup.getMenuInflater().inflate(R.menu.after_login_navigation_menu, popup.getMenu());
+        } else {
+            popup.getMenuInflater().inflate(R.menu.login_navigation_menu, popup.getMenu());
+        }
+
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
             public boolean onMenuItemClick(MenuItem item) {
-                // Handle menu item click here
+                int itemId = item.getItemId();
+                if (isLoggedIn) {
+                    if (itemId == R.id.menu_add_point_toilet_add) {
+                        Intent intent = new Intent(getContext(), AddToiletActivity.class);
+                        startActivity(intent);
+                        return true;
+                    } else if (itemId == R.id.menu_point_detail_report) {
+                        sessionManager.clearLoginSession();
+                        Intent intent = new Intent(getContext(), detailActivity.class);
+                        startActivity(intent);
+                        return true;
+                    }
+                } else {
+                    if (itemId == R.id.menu_header_login) {
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        startActivity(intent);
+                        return true;
+                    } else if (itemId == R.id.menu_signup_login) {
+                        Intent intent = new Intent(getContext(), SignupActivity.class);
+                        startActivity(intent);
+                        return true;
+                    }
+                }
                 return false;
             }
         });
         popup.show();
     }
+
 
     @Override
     public void onMapReady(GoogleMap map) {
@@ -270,6 +311,36 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
+    }
+
+    private void searchLocation(String locationName) {
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(locationName, 1);
+            if (!addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                double latitude = address.getLatitude();
+                double longitude = address.getLongitude();
+                LatLng latLng = new LatLng(latitude, longitude);
+
+                // Remove previous search marker if it exists
+                if (searchMarker != null) {
+                    searchMarker.remove();
+                }
+
+                // Add a marker for the searched location
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(latLng)
+                        .title(locationName);
+                searchMarker = googleMap.addMarker(markerOptions);
+
+                // Move the camera to the searched location
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+            } else {
+                Toast.makeText(requireContext(), "Location not found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

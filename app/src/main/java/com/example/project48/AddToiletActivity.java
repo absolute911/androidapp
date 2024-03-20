@@ -97,7 +97,7 @@ public class AddToiletActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Thank you very much", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(AddToiletActivity.this, MainpageActivity.class);
+        Intent intent = new Intent(AddToiletActivity.this, detailFragment.class);
         startActivity(intent);
     }
     private void addToilet(String name, String address, String open_hours, String coordinates) {

@@ -17,6 +17,7 @@
     <string name="item_bin_str">垃圾桶</string>
     <string name="menu_title">要顯示的項目：</string>
     <string name="menu_login">登入已解鎖更多功能</string>
+    <string name="menu_after_login">更多功能</string>
     <string name="icon_description_str">圖示說明</string>
     <string name="recycler_item_first_line_str">第一行</string>
     <string name="recycler_item_meta_str">meta</string>
@@ -39,6 +40,8 @@
     <string name="add_point_picture_textView_str">拍照或從設備中選擇</string>
     <string name="add_point_picture_icon_imageView_desc_str">添加照片圖標</string>
     <string name="add_point_picture_imageView_desc_str">用戶添加的照片</string>
+
+    <string name="add_point_toilet_add_str">添加廁所</string>
 
     <string name="need_account_dialog_title_str">需要帳戶的操作</string>
     <string name="need_account_dialog_message_str">請登入或建立帳戶以將項目新增至地圖</string>

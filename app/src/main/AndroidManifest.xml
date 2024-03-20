@@ -14,7 +14,7 @@
 
         <!-- IntroActivity 设置为启动活动 -->
 
-        <activity android:name=".IntroActivity"
+        <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

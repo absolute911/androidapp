@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project48.IntroActivity;
 import com.example.project48.MainpageActivity;
 import com.example.project48.R;
 import com.example.project48.misc.SessionManager;
@@ -40,6 +41,16 @@ public class LoginActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.editTextUserAccount);
         editTextPassword = findViewById(R.id.editTextPassword);
         sessionManager = new SessionManager(getApplicationContext());
+
+        // add register button on login page
+        Button buttonRegister = findViewById(R.id.buttonRegister);
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Button loginButton = findViewById(R.id.buttonLogin2);
         if (loginButton != null) {

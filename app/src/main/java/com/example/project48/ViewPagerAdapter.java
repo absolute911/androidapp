@@ -16,7 +16,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0: return new detailFragment();
-            case 1: return new routeFragment();
+            case 1: return new listFragment();
             default: return new detailFragment();
         }
     }

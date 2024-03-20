@@ -62,8 +62,8 @@ public class MapActivity3 extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 // Open the map activity
-                //Intent intent = new Intent(MapActivity3.this, MapActivity4.class);
-                //startActivity(intent);
+//                Intent intent = new Intent(MapActivity3.this, MapActivity4.class);
+//                startActivity(intent);
             }
         });
 

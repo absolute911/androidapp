@@ -34,11 +34,11 @@
         android:hint="Search"
         android:inputType="text" />
 
-    <ListView
-        android:id="@+id/ToiletListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/searchEditText" />
+<!--    <ListView-->
+<!--        android:id="@+id/ToiletListView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/searchEditText" />-->
 
 </LinearLayout>
 </RelativeLayout>

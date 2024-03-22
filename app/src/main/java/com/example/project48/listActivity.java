@@ -31,7 +31,7 @@ public class listActivity extends AppCompatActivity {
     private String longitude = "114.1797521678627";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.toilet_list);
+        setContentView(R.layout.fragment_list);
 
         double lat = Double.parseDouble(latitude);
         double lon = Double.parseDouble(longitude);

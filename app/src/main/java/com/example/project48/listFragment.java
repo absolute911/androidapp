@@ -2,6 +2,7 @@ package com.example.project48;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class listFragment extends Fragment {
                     .build();
 
             try (Response response = client.newCall(request).execute()) {
+
                 final String responseBody = response.body() != null ? response.body().string() : null;
                 requireActivity().runOnUiThread(() -> {
                     if (response.isSuccessful() && responseBody != null) {
@@ -76,14 +78,37 @@ public class listFragment extends Fragment {
                                 toiletList.add(toilet);
                             }
                             ListView listView = requireView().findViewById(R.id.ToiletListView);
-                            ToiletAdapter adapter = new ToiletAdapter((listActivity) requireContext(), toiletList);
+                            ToiletAdapter adapter = new ToiletAdapter((MainActivity) requireContext(), toiletList);
                             listView.setAdapter(adapter);
 
+                            // Single click listener
                             listView.setOnItemClickListener((parent, view, position, id) -> {
+                                    Toilet selectedToilet = (Toilet) parent.getItemAtPosition(position);
+                                    Bundle bundle = new Bundle();
+//                                    bundle.putSerializable("selectedToilet", selectedToilet);
+
+                                    // Create an instance of the target fragment
+//                                    TargetFragment targetFragment = new TargetFragment();
+//                                    targetFragment.setArguments(bundle);
+
+                                    // Replace the current fragment with the target fragment
+//                                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//                                    transaction.replace(R.id.fragment_container, targetFragment);
+//                                    transaction.addToBackStack(null);
+//                                    transaction.commit();
+
+                            });
+
+                            // Long press listener (double-click action)
+                            listView.setOnItemLongClickListener((parent, view, position, id) -> {
                                 Toilet selectedToilet = (Toilet) parent.getItemAtPosition(position);
                                 Intent intent = new Intent(requireContext(), detailActivity.class);
                                 intent.putExtra("toilet", selectedToilet);
                                 startActivity(intent);
+                                // Perform double-click action here
+                                // For example, display a toast message
+                                //Toast.makeText(requireContext(), "Double click detected", Toast.LENGTH_SHORT).show();
+                                return true;
                             });
                         } catch (JSONException e) {
                             e.printStackTrace();

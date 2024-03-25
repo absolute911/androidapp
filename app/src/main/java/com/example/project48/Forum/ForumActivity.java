@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
@@ -97,7 +98,7 @@ public class ForumActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             threads.clear();
                             threads.addAll(threadList);
-                            ThreadRecyclerViewAdapter adapter = new ThreadRecyclerViewAdapter(this, threads, new ThreadRecyclerViewAdapter.OnItemClickListener() {
+                            ThreadRecyclerViewAdapter adapter = new ThreadRecyclerViewAdapter(ForumActivity.this, threads, new ThreadRecyclerViewAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(ForumThread thread) {
                                     Log.d("Thread ID", "Clicked Thread ID: " + thread.getId()); // Check the thread ID

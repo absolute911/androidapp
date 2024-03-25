@@ -58,13 +58,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
 
-                    android:text="@string/point_detail_name_str"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@string/point_detail_name_str"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
 
                     android:textColor="@android:color/white"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

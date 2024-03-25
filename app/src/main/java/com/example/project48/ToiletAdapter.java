@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class ToiletAdapter extends ArrayAdapter<Toilet> {
-    public ToiletAdapter(listActivity context, ArrayList<Toilet> toilets) {
+    public ToiletAdapter(MainActivity context, ArrayList<Toilet> toilets) {
         super(context, 0, toilets);
     }
 

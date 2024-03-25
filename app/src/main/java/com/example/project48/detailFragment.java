@@ -69,25 +69,8 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        searchView = view.findViewById(R.id.idSearchView);
         mapView = view.findViewById(R.id.mapView);
         geocoder = new Geocoder(requireContext());
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                String locationName = query.trim();
-                searchLocation(locationName);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-
 
     // 設置 Toolbar
         Toolbar toolbar = view.findViewById(R.id.toolbar);
@@ -109,9 +92,6 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
         );
         return view;
     }
-
-
-
 
     @Override
     public void onResume() {
@@ -193,7 +173,6 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d("detailFragment", "onOptionsItemSelected: item selected " + item.getItemId());
@@ -249,7 +228,6 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
         });
         popup.show();
     }
-
 
     @Override
     public void onMapReady(GoogleMap map) {
@@ -312,35 +290,4 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
             }
         });
     }
-
-    private void searchLocation(String locationName) {
-        try {
-            List<Address> addresses = geocoder.getFromLocationName(locationName, 1);
-            if (!addresses.isEmpty()) {
-                Address address = addresses.get(0);
-                double latitude = address.getLatitude();
-                double longitude = address.getLongitude();
-                LatLng latLng = new LatLng(latitude, longitude);
-
-                // Remove previous search marker if it exists
-                if (searchMarker != null) {
-                    searchMarker.remove();
-                }
-
-                // Add a marker for the searched location
-                MarkerOptions markerOptions = new MarkerOptions()
-                        .position(latLng)
-                        .title(locationName);
-                searchMarker = googleMap.addMarker(markerOptions);
-
-                // Move the camera to the searched location
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-            } else {
-                Toast.makeText(requireContext(), "Location not found", Toast.LENGTH_SHORT).show();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

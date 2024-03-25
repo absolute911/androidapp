@@ -34,23 +34,5 @@
         android:apiKey="YOUR_MAPS_API_KEY"
         android:contentDescription="Map View" />
 
-    <!-- Part 1: Search bar, three dots, and map -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/searchBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:ignore="MissingConstraints">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/idSearchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="#BFBFBF"
-            android:elevation="5dp"
-            app:iconifiedByDefault="false"
-            app:queryHint="Search Here" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

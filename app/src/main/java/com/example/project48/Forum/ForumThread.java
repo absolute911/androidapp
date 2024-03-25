@@ -10,7 +10,7 @@ public class ForumThread  {
     // Constructor, getters, and setters
     public ForumThread(String title, String content, String id) {
         this.title = title;
-        //this.content = content;
+        this.content = content;
         this.id = id;
     }
 

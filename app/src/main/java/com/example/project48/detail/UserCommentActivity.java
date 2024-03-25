@@ -1,5 +1,6 @@
 package com.example.project48.detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project48.Toilet;
 import com.example.project48.misc.SessionManager;
 import com.example.project48.misc.URL;
 import com.example.project48.R;
@@ -40,6 +42,9 @@ public class UserCommentActivity extends AppCompatActivity {
     private RatingBar ratingBar;
     private String username;
     private com.example.project48.misc.URL URL = new URL();
+    private Toilet selectedToilet;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,21 +132,28 @@ public class UserCommentActivity extends AppCompatActivity {
         }).start();
     }
     private void getDataFromIntent() {
-        String json = getIntent().getStringExtra("json");
-        if (json != null) {
-            try {
-                nearestToilet = new JSONObject(json);
-                Log.d("getDataFromIntent", "getDataFromIntent: " + nearestToilet);
-                JSONObject toiletObject = nearestToilet.getJSONObject("nearestToilet");
-                toiletName  = toiletObject.getString("name");
-                toiletID = toiletObject.getString("_id");
-                // Process the JSON data here
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } else {
-            Log.e("NextActivity", "No JSON data found in intent");
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            selectedToilet = intent.getParcelableExtra("toilet");
+            toiletID = selectedToilet.getId();
+            toiletName = selectedToilet.getName();
         }
+//        String json = getIntent().getStringExtra("json");
+//        if (json != null) {
+//            try {
+//                nearestToilet = new JSONObject(json);
+//                Log.d("getDataFromIntent", "getDataFromIntent: " + nearestToilet);
+//                JSONObject toiletObject = nearestToilet.getJSONObject("nearestToilet");
+//                toiletName  = toiletObject.getString("name");
+//                toiletID = toiletObject.getString("_id");
+//                // Process the JSON data here
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//            Log.e("NextActivity", "No JSON data found in intent");
+//        }
     }
 
 

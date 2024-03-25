@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import okhttp3.OkHttpClient;
 
+import com.example.project48.detail.UserCommentActivity;
 import com.example.project48.detail.detailActivity;
 import com.example.project48.misc.URL;
 
@@ -85,7 +86,7 @@ public class listFragment extends Fragment {
                             listView.setOnItemClickListener((parent, view, position, id) -> {
                                     Toilet selectedToilet = (Toilet) parent.getItemAtPosition(position);
                                     Bundle bundle = new Bundle();
-//                                    bundle.putSerializable("selectedToilet", selectedToilet);
+                                    bundle.putSerializable("selectedToilet", selectedToilet.getId());
 
                                     // Create an instance of the target fragment
 //                                    TargetFragment targetFragment = new TargetFragment();
@@ -102,7 +103,7 @@ public class listFragment extends Fragment {
                             // Long press listener (double-click action)
                             listView.setOnItemLongClickListener((parent, view, position, id) -> {
                                 Toilet selectedToilet = (Toilet) parent.getItemAtPosition(position);
-                                Intent intent = new Intent(requireContext(), detailActivity.class);
+                                Intent intent = new Intent(requireContext(), UserCommentActivity.class);
                                 intent.putExtra("toilet", selectedToilet);
                                 startActivity(intent);
                                 // Perform double-click action here

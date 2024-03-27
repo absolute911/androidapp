@@ -1,6 +1,5 @@
 package com.example.project48;
 
-import android.content.Intent;
 import android.os.Bundle;
 //<<<<<<< HEAD
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.project48.misc.URL;
-import com.example.project48.detail.detailActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,9 +78,9 @@ public class listActivity extends AppCompatActivity {
                                         jsonObject.getDouble("distance"),
                                         jsonObject.getString("_id"),
                                         jsonObject.getString("open_hours"),
-                                        jsonObject.getString("address")
+                                        jsonObject.getString("address"),
 
-                                );
+                                        jsonObject.getString("coordinates"));
                                 toiletList.add(toilet);
                             }
                             ListView listView = findViewById(R.id.ToiletListView);

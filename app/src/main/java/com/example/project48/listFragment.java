@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import okhttp3.OkHttpClient;
 
@@ -23,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import okhttp3.Request;
@@ -74,7 +76,8 @@ public class listFragment extends Fragment {
                                         jsonObject.getDouble("distance"),
                                         jsonObject.getString("_id"),
                                         jsonObject.getString("open_hours"),
-                                        jsonObject.getString("address")
+                                        jsonObject.getString("address"),
+                                        jsonObject.getString("coordinates")
                                 );
                                 toiletList.add(toilet);
                             }
@@ -84,21 +87,19 @@ public class listFragment extends Fragment {
 
                             // Single click listener
                             listView.setOnItemClickListener((parent, view, position, id) -> {
-                                    Toilet selectedToilet = (Toilet) parent.getItemAtPosition(position);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putSerializable("selectedToilet", selectedToilet.getId());
+                                Toilet selectedToilet = (Toilet) parent.getItemAtPosition(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("selectedToilet", selectedToilet);
 
-                                    // Create an instance of the target fragment
-//                                    TargetFragment targetFragment = new TargetFragment();
-//                                    targetFragment.setArguments(bundle);
+                                DetailFragment detailFragment = new DetailFragment();
+                                detailFragment.setArguments(bundle);
 
-                                    // Replace the current fragment with the target fragment
-//                                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                                    transaction.replace(R.id.fragment_container, targetFragment);
-//                                    transaction.addToBackStack(null);
-//                                    transaction.commit();
-
+                                FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.fragmentContainer, detailFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
                             });
+
 
                             // Long press listener (double-click action)
                             listView.setOnItemLongClickListener((parent, view, position, id) -> {

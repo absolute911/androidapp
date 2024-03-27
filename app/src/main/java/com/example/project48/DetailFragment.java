@@ -1,9 +1,10 @@
 package com.example.project48;
 
+import static androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.example.project48.Login.LoginActivity;
 import com.example.project48.Login.SignupActivity;
 import com.example.project48.detail.detailActivity;
 import com.example.project48.misc.SessionManager;
+import com.example.project48.misc.URL;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -42,10 +44,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.List;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
-public class detailFragment extends Fragment implements OnMapReadyCallback {
+public class DetailFragment extends Fragment implements OnMapReadyCallback {
 
     private MapView mapView;
 
@@ -53,18 +56,25 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
 
-    private JSONObject nearestToilet;
+    private Toilet nearestToilet;
 
     private LatLngBounds hongKongBounds;
 
     private Geocoder geocoder;
     private Marker searchMarker;
 
+    double SampleLatitude = Double.parseDouble("22.317507333012692");
+    double SampleLongitude = Double.parseDouble("114.1797521678627");
+
+    private String initialCoordinates;
+    private String initialName;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
+
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
@@ -72,6 +82,7 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
         mapView = view.findViewById(R.id.mapView);
         geocoder = new Geocoder(requireContext());
 
+        getDataFromBundle();
     // 設置 Toolbar
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         // Set the toolbar as the activity's support action bar
@@ -117,44 +128,27 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
         mapView.onLowMemory();
     }
 
-    private void getDataFromIntent() {
-        Bundle arguments = getArguments();
-        if (arguments != null && arguments.containsKey("json")) {
-            String json = arguments.getString("json");
-            if (json != null) {
-                try {
-                    nearestToilet = new JSONObject(json);
-                    // Process the JSON data here
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Log.e("DetailFragment", "No JSON data found in arguments");
-            }
-        } else {
-            Log.e("DetailFragment", "No JSON data found in arguments");
+    private void getDataFromBundle() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            nearestToilet = bundle.getParcelable("selectedToilet");
         }
     }
 
     private void displayMarkersOnMap() {
         if (nearestToilet == null) {
-            Toast.makeText(getActivity(), "No toilet data available", Toast.LENGTH_SHORT).show();
+            getDetail(SampleLatitude, SampleLongitude);
             return;
         }
 
         try {
-            JSONObject toiletObject = nearestToilet.getJSONObject("nearestToilet");
-            String name = toiletObject.getString("name");
-            String coordinates = toiletObject.getString("coordinates");
+            String name = nearestToilet.getName();
+            String coordinates = nearestToilet.getCoordinates();
             double latitude = Double.parseDouble(coordinates.split(",")[0]);
             double longitude = Double.parseDouble(coordinates.split(",")[1]);
             LatLng latLng = new LatLng(latitude, longitude);
 
-            double SampleLatitude = Double.parseDouble("22.317507333012692");
-            double SampleLongitude = Double.parseDouble("114.1797521678627");
             LatLng sampleLatLng = new LatLng(SampleLatitude, SampleLongitude);
-
-
 
             googleMap.addMarker(new MarkerOptions().position(latLng).title(name));
 
@@ -162,7 +156,7 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
             googleMap.addMarker(new MarkerOptions().position(sampleLatLng).title("HKMU JC"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -232,7 +226,6 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap map) {
         googleMap = map;
-        getDataFromIntent();
         displayMarkersOnMap(); // Add the marker to the map
 
         // Define the Hong Kong bounds
@@ -240,6 +233,7 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
                 new LatLng(22.3608, 113.9154), // SW corner
                 new LatLng(22.362745, 114.5025) // NE corner
         );
+
 
         // Wait for the map to be laid out before setting the bounds
         mapView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -255,8 +249,7 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
                 // Check if nearestToilet is available
                 if (nearestToilet != null) {
                     try {
-                        JSONObject toiletObject = nearestToilet.getJSONObject("nearestToilet");
-                        String coordinates = toiletObject.getString("coordinates");
+                        String coordinates = nearestToilet.getCoordinates();
                         double latitude = Double.parseDouble(coordinates.split(",")[0]);
                         double longitude = Double.parseDouble(coordinates.split(",")[1]);
                         LatLng latLng = new LatLng(latitude, longitude);
@@ -275,7 +268,8 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
 
                         // Animate the camera to show the combined bounds
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(combinedBounds, width, height, padding));
-                    } catch (JSONException e) {
+
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else {
@@ -290,4 +284,68 @@ public class detailFragment extends Fragment implements OnMapReadyCallback {
             }
         });
     }
+
+    private void getDetail(double latitude, double longitude) {
+        new Thread(() -> {
+            OkHttpClient client = new OkHttpClient();
+            URL URL = new URL();
+            String url = URL.getURL() + "items/nearest?latitude=" + latitude + "&longitude=" + longitude;
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            try (Response response = client.newCall(request).execute()) {
+                final String responseBody = response.body() != null ? response.body().string() : null;
+                // Make sure you are calling runOnUiThread() on an Activity's context.
+                if(getActivity() == null) return;
+                getActivity().runOnUiThread(() -> {
+                    if (response.isSuccessful() && responseBody != null) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(responseBody);
+                            if (jsonObject.has("nearestToilet")) {
+                                JSONObject nearestToiletObject = jsonObject.getJSONObject("nearestToilet");
+                                initialName = nearestToiletObject.getString("name");
+                                initialCoordinates = nearestToiletObject.getString("coordinates");
+                                initialMarkersOnMap(initialCoordinates, initialName);
+                            } else {
+                                Toast.makeText(getActivity(), "Nearest toilet data not found.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else {
+                        Toast.makeText(getActivity(), "Fetch failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                // It's good practice to handle errors, maybe update the UI to show an error message
+                if(getActivity() == null) return;
+                getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Error fetching details.", Toast.LENGTH_SHORT).show());
+            }
+        }).start();
+    }
+
+    private void initialMarkersOnMap(String coordinates, String name) {
+        Log.d("initialMarkersOnMap", "initialMarkersOnMap: ");
+        try {
+            double latitude = Double.parseDouble(coordinates.split(",")[0]);
+            double longitude = Double.parseDouble(coordinates.split(",")[1]);
+            LatLng latLng = new LatLng(latitude, longitude);
+
+            LatLng sampleLatLng = new LatLng(SampleLatitude, SampleLongitude);
+
+            googleMap.addMarker(new MarkerOptions().position(latLng).title(name));
+
+            //sample marker
+            googleMap.addMarker(new MarkerOptions().position(sampleLatLng).title("HKMU JC"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

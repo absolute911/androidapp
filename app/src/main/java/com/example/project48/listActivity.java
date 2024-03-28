@@ -1,10 +1,12 @@
 package com.example.project48;
 
+import android.content.Intent;
 import android.os.Bundle;
 //<<<<<<< HEAD
 import android.view.View;
 //=======
 //>>>>>>> origin/master
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +29,8 @@ public class listActivity extends AppCompatActivity {
 
     private String latitude ="22.317507333012692";
     private String longitude = "114.1797521678627";
+
+    private Button detailButton;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toilet_list);
@@ -34,9 +38,18 @@ public class listActivity extends AppCompatActivity {
         double lat = Double.parseDouble(latitude);
         double lon = Double.parseDouble(longitude);
 
+        detailButton = findViewById(R.id.detailButton);
+
         // Fetch the details as soon as the page loads
         getDetailList(lat, lon);
 
+        detailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(listActivity.this, DetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 设置 Toolbar
         Toolbar toolbar = findViewById(R.id.add_list_barLayout);

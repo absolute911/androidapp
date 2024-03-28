@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("detailFragment", "onOptionsItemSelected: item selected " + item.getItemId());
+        Log.d("DetailFragment", "onOptionsItemSelected: item selected " + item.getItemId());
         switch (item.getItemId()) {
             case R.id.action_overflow:
                 showPopupMenu();

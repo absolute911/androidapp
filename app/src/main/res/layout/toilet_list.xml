@@ -18,27 +18,46 @@
                 android:id="@+id/add_list_barLayout"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 app:navigationIcon="@drawable/ic_baseline_close_24"
                 app:menu="@menu/top_add__bar_add_point"
                 app:title="Show list" />
-
         </com.google.android.material.appbar.AppBarLayout>
 
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search"
+            android:inputType="text" />
 
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Search"
-        android:inputType="text" />
+        <ListView
+            android:id="@+id/ToiletListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchEditText" />
 
-    <ListView
-        android:id="@+id/ToiletListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/searchEditText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <!-- Detail Button -->
+            <Button
+                android:id="@+id/detailButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Detail" />
+
+            <!-- List Button -->
+            <Button
+                android:id="@+id/listButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="List" />
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
